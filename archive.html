@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarthak Munshi</title>
+    <title>Archive - Sarthak Munshi</title>
     <style>
         body {
             font-family: 'Georgia', serif;
@@ -63,28 +63,6 @@
 
         .section {
             margin-bottom: 50px;
-        }
-
-        .item {
-            margin-bottom: 20px;
-        }
-
-        .item-title {
-            font-weight: bold;
-            font-size: 19px;
-        }
-
-        .item-detail {
-            font-size: 17px;
-            margin-left: 10px;
-        }
-
-        ul {
-            padding-left: 25px;
-        }
-
-        li {
-            margin-bottom: 12px;
         }
 
         .breathing-container {
@@ -160,11 +138,47 @@
             border-top: 1px solid #eeeeee;
         }
 
-        .fun-fact {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 30px;
+        .writing-item {
+            margin-bottom: 35px;
+        }
+
+        .writing-title {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .writing-date {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .writing-description {
+            font-size: 17px;
+        }
+
+        .writing-link {
+            color: #4b6584;
+            text-decoration: none;
+            border-bottom: 1px dotted #4b6584;
+        }
+
+        .writing-link:hover {
+            color: #1e3799;
+            border-bottom: 1px solid #1e3799;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #4b6584;
+            text-decoration: none;
+            border-bottom: 1px dotted #4b6584;
+        }
+
+        .back-link:hover {
+            color: #1e3799;
+            border-bottom: 1px solid #1e3799;
         }
     </style>
 </head>
@@ -172,72 +186,56 @@
     <header>
         <h1>Sarthak Munshi</h1>
         <div class="links">
+            <a href="index.html">Home</a>
             <a href="https://scholar.google.ca/citations?hl=en&user=0RfLLJcAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">Google Scholar</a>
             <a href="https://infosec.exchange/@lprimero" target="_blank">Mastadon</a>
             <a href="https://x.com/kingroryg" target="_blank">X</a>
             <a href="mailto:sarthakm@pm.me">Email</a>
-            <a href="archive.html">Archive</a>
         </div>
     </header>
 
     <main>
-        <p>
-            I'm exploring the intersection of technology and mindfulness. With a background in software development, 
-            I'm currently working on creating digital experiences that help people find moments of calm in their daily lives.
-        </p>
-
-        <div class="breathing-container">
-            <div class="breathing-circle"></div>
-            <div class="breathing-text">Take a moment to breathe with me</div>
-        </div>
-
-        <!-- <div class="section">
-            <h2>Experience</h2>
-            <div class="item">
-                <div class="item-title">Senior Software Engineer, Mindful Tech Inc.</div>
-                <div class="item-detail">Developed applications focused on mental wellbeing and mindfulness practices</div>
-            </div>
-            <div class="item">
-                <div class="item-title">UX Designer, Calm Computing Ltd.</div>
-                <div class="item-detail">Designed interfaces that prioritize user peace of mind and focused attention</div>
-            </div>
-            <div class="item">
-                <div class="item-title">Freelance Developer, Self-employed</div>
-                <div class="item-detail">Created bespoke solutions for clients seeking to promote wellbeing through technology</div>
-            </div>
-        </div> -->
-
-        <!-- <div class="section">
-            <h2>Featured Projects</h2>
-            <ul>
-                <li><strong>Breathe App</strong>: A mobile application guiding users through mindful breathing exercises</li>
-                <li><strong>Digital Detox</strong>: A browser extension that helps users maintain focused work sessions</li>
-                <li><strong>Mindful UI Kit</strong>: An open-source collection of calm, distraction-free UI components</li>
-            </ul>
-        </div> -->
+        <h2>Archive of Writings</h2>
+        <p>A collection of essays, thoughts, tutorials, and explorations over the years.</p>
 
         <div class="section">
-            <h2>Research Work</h2>
-            <ul>
-                <li><em>MAPLE: Modular Attention for Interpretable and Prosocial Multi-Agent Reinforcement Learning</em> (<a href="https://arxiv.org/pdf/2502.17601" target="_blank">arXiv 2025</a>)</li>
-                <li><em>ACSE-Bench: Can LLMs threat-model real-world cloud infrastructure?</em> (<a href="https://arxiv.org/pdf/2502.17601" target="_blank">arXiv 2025</a>)</li>
-                <li><em>Representation Engineering for Large-Language Models: Survey and Research Challenges</em> (<a href="https://arxiv.org/pdf/2502.17601" target="_blank">arXiv 2025</a>)</li>
-                <li><em>A Field Experiment to Study the Effect of Ad-Blocking and Anti-Tracking on Consumer Behavior</em> (<a href="https://www.law.upenn.edu/live/files/12361-a-field-experiment-to-study-the-effect-of" target="_blank">Economics of Digital Services 2022</a>)</li>
-                <li><em>Chapel comes of age: Making scalable programming productive</em> (<a href="https://chapel-lang.org/publications/cug2018-chapel.pdf" target="_blank">Cray User Group 2018</a>)</li>
-            </ul>
+
+            <div class="writing-item">
+                <div class="writing-title">
+                    <a href="posts/pixel-9-ai-implications.html" class="writing-link">On Provenance of Pictures</a>
+                </div>
+                <div class="writing-date">August 18, 2024</div>
+                <div class="writing-description">
+                    Exploring the philosophical and ethical implications of AI-powered photography features in the latest smartphones. How do we maintain visual trust in an era where the line between captured and generated imagery is increasingly blurred?
+                </div>
+            </div>
+
+            <div class="writing-item">
+                <div class="writing-title">
+                    <a href="posts/kolmogorov-complexity.html" class="writing-link">Kolmogorov Complexity: A Mathematical Measure of Randomness</a>
+                </div>
+                <div class="writing-date">September 26, 2023</div>
+                <div class="writing-description">
+                    Exploring the mathematical concept of Kolmogorov complexity through a fun story about Alice and Bob's coin toss game. Learn how we can quantify randomness and complexity in strings.
+                </div>
+            </div>
+
+            <div class="writing-item">
+                <div class="writing-title">
+                    <a href="posts/security-infrastructure-checklist.html" class="writing-link">Security Infrastructure Design Interview Cheatsheet</a>
+                </div>
+                <div class="writing-date">October 12, 2018</div>
+                <div class="writing-description">
+                    A comprehensive overview of security considerations for modern infrastructure, covering network security, identity management, data protection, and compliance.
+                </div>
+            </div>
         </div>
 
-        <div class="fun-fact">
-            <h2>News</h2>
-            <ul>
-                <li><em>01/2025:</em> A <a href='https://unsql.ai' target="_blank">company</a> that I started with a friend is now acquired.</li>
-                <li><em>12/2024:</em> I'm working on a <a href="https://www.vadafilms.com/" target="_blank">short film</a>. More to come soon.</li>
-            </ul>
-        </div>
+        <a href="index.html" class="back-link">← Return to home</a>
     </main>
 
     <footer>
-        © 2024 Sarthak Munshi
+        © 2024 Sarthak Munshi • Creating technology that breathes with you
     </footer>
 
     <script>
@@ -256,4 +254,4 @@
         });
     </script>
 </body>
-</html>
+</html> 

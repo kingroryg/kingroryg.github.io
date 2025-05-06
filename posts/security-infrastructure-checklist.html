@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Infrastructure Design Interview Cheatsheet - Sarthak Munshi</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #ffffff;
+            color: #333333;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            transition: all 0.5s ease;
+        }
+
+        header {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eeeeee;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-weight: normal;
+            font-size: 36px;
+            color: #555555;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-weight: normal;
+            font-size: 28px;
+            color: #555555;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-weight: normal;
+            font-size: 24px;
+            color: #555555;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eeeeee;
+            padding-bottom: 8px;
+        }
+
+        .links {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .links a {
+            color: #4b6584;
+            text-decoration: none;
+            border-bottom: 1px dotted #4b6584;
+        }
+
+        .links a:hover {
+            color: #1e3799;
+            border-bottom: 1px solid #1e3799;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        .post-date {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .breathing-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120px;
+            margin: 40px 0;
+            perspective: 1000px;
+        }
+
+        .breathing-circle {
+            width: 80px;
+            height: 80px;
+            background-color: #e6f2ff;
+            border-radius: 50%;
+            position: relative;
+            animation: breathe 8s infinite ease-in-out;
+            box-shadow: 0 0 20px rgba(204, 229, 255, 0.5);
+            cursor: pointer;
+        }
+
+        .breathing-circle::before, .breathing-circle::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: rgba(230, 242, 255, 0.7);
+            transform: scale(0);
+            animation: ripple 8s infinite ease-in-out;
+        }
+
+        .breathing-circle::after {
+            animation-delay: 1s;
+        }
+
+        @keyframes breathe {
+            0% { transform: scale(1) rotate(0deg); background-color: #e6f2ff; }
+            25% { transform: scale(1.1) rotate(5deg); }
+            50% { transform: scale(1.3) rotate(0deg); background-color: #cce5ff; }
+            75% { transform: scale(1.1) rotate(-5deg); }
+            100% { transform: scale(1) rotate(0deg); background-color: #e6f2ff; }
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+
+        .breathing-text {
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            bottom: -30px;
+            font-size: 14px;
+            color: #777;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .breathing-container:hover .breathing-text {
+            opacity: 1;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            font-size: 14px;
+            color: #999999;
+            text-align: center;
+            border-top: 1px solid #eeeeee;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #4b6584;
+            text-decoration: none;
+            border-bottom: 1px dotted #4b6584;
+        }
+
+        .back-link:hover {
+            color: #1e3799;
+            border-bottom: 1px solid #1e3799;
+        }
+
+        em {
+            color: #555;
+            font-style: italic;
+        }
+
+        ol {
+            padding-left: 25px;
+            margin-bottom: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .checklist {
+            background-color: #f9f9f9;
+            padding: 15px 25px;
+            border-radius: 5px;
+            margin: 15px 0 30px 0;
+            border-left: 3px solid #4b6584;
+        }
+
+        .disclaimer {
+            background-color: #fff8e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 3px solid #f1c40f;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sarthak Munshi</h1>
+        <div class="links">
+            <a href="../index.html">Home</a>
+            <a href="https://scholar.google.ca/citations?hl=en&user=0RfLLJcAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">Google Scholar</a>
+            <a href="https://infosec.exchange/@lprimero" target="_blank">Mastadon</a>
+            <a href="https://x.com/kingroryg" target="_blank">X</a>
+            <a href="mailto:sarthakm@pm.me">Email</a>
+            <a href="../archive.html">Archive</a>
+        </div>
+    </header>
+
+    <main>
+        <h1>Security Infrastructure Design Interview Cheatsheet</h1>
+        <div class="post-date">October 12, 2018</div>
+
+        <p>
+            This is a rough checklist of the things to look out when securing an infrastructure. It is by no means a definitive guide and is meant to serve as a checklist for interview prep. Some would call this a 1000 ft view of the security of an infratructure. Additions to this checklist are welcome.
+        </p>
+
+        <div class="disclaimer">
+            <p>Disclaimer: I wrote this back when I was just starting out in the industry. Please point out stuff that you feel isn't relevant given today's security landscape.</p>
+        </div>
+
+        <h3>Network</h3>
+        <div class="checklist">
+            <ol>
+                <li>Segment the network based on specific use cases/teams/applications/permissions.</li>
+                <li>Establish L4 and L7 layer firewalls.</li>
+                <li>Enable L4 DDoS protection.</li>
+                <li>Add appropriate rules to filter the traffic.</li>
+                <li>Add HTTP load balancing.</li>
+                <li>Utilize Shared VPC or VPC peering for better segmentation.</li>
+                <li>Protect Public DNS. Explore DNSSEC.</li>
+                <li>Avoid creating massive subnets.</li>
+                <li>Set up VPN access to cloud / private networks.</li>
+                <li>Set up and monitor internet requests through a NAT gateeway.</li>
+                <li>Restrict and monitor cross-environment communication.</li>
+                <li>Make sure TLS &gt;= 1.2 is deployed and correctly used across HTTP services.</li>
+            </ol>
+        </div>
+
+        <h3>Identity</h3>
+        <div class="checklist">
+            <ol>
+                <li>Bind roles to groups.</li>
+                <li>Follow the principle of least privilege.</li>
+                <li>Avoid using wildcards to assign permissions.</li>
+                <li>Set up a managed identities system like AD or AWS IAM. Do not manually manage identities.</li>
+            </ol>
+        </div>
+
+        <h3>Data Protection</h3>
+        <div class="checklist">
+            <ol>
+                <li>Protect data using encryption. Avoid broken or deprecated ciphers and libraries.</li>
+                <li>Control the access and usage of data via ACLs/Permissions/etc.</li>
+                <li>Prevent and track data exfiltration. Deploy tools or VPC controls to track this.</li>
+                <li>Deploy tools and measure that indetify and redact PII.</li>
+                <li>Enforce the use of tools such as secrets manager (or others) to protect secrets.</li>
+                <li>Make sure your code/secrets isn't vulnerable to Google dorking.</li>
+                <li>Create a secure data lifecyle policy (Storage -> Retention -> Versioning -> Deletion).</li>
+            </ol>
+        </div>
+
+        <h3>Security Operations / Vulnerability Management</h3>
+        <div class="checklist">
+            <ol>
+                <li>Deploy software scans for vulnerabilities.</li>
+                <li>Setup appropriate logging, monitoring, and alerting mechanisms.</li>
+                <li>Promote secure by default practices such a secure terraform modules, etc.</li>
+                <li>Allow scanning or other security packages in CI/CD pipelines.</li>
+                <li>Enable static analysis of code and IaC.</li>
+                <li>Promote secure package and container image deployments via managed artifactories.</li>
+                <li>Set up a standard suite of security integration tests.</li>
+                <li>Enforce hardened OS images and secure boot.</li>
+                <li>Create a mechanism to review audit logs.</li>
+            </ol>
+        </div>
+
+        <h3>Compliance</h3>
+        <div class="checklist">
+            <ol>
+                <li>Verify authN and authZ practices and access control.</li>
+                <li>Review key management practices.</li>
+                <li>Monitoring of compliance violations.</li>
+                <li>Monitoring of network, identity, permissions, etc violations.</li>
+            </ol>
+        </div>
+
+        <a href="../archive.html" class="back-link">← Return to archive</a>
+    </main>
+
+    <footer>
+        © 2024 Sarthak Munshi
+    </footer>
+
+    <script>
+        const breathingCircle = document.querySelector('.breathing-circle');
+        
+        breathingCircle.addEventListener('click', () => {
+            // Change animation duration randomly between 5-10 seconds
+            const newDuration = 5 + Math.random() * 5;
+            breathingCircle.style.animationDuration = `${newDuration}s`;
+            
+            // Add a pulse effect
+            breathingCircle.classList.add('pulse');
+            setTimeout(() => {
+                breathingCircle.classList.remove('pulse');
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 
