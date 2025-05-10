@@ -6,6 +6,9 @@
     <title>Kolmogorov Complexity: A Mathematical Measure of Randomness - Sarthak Munshi</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
     <style>
         body {
             font-family: 'Georgia', serif;
@@ -238,21 +241,21 @@
             Let's start with describing Bob's sequence in Python,
         </p>
 
-        <pre><code>In [0]: 'T'*20
+        <pre><code class="language-python">In [0]: 'T'*20
 Out[0]: TTTTTTTTTTTTTTTTTTTT</code></pre>
 
         <p>
             The length of this description in Python comes out to be 6 (as shown below) which is less than the length of the sequence itself.
         </p>
 
-        <pre><code>In [1]: len("'T'*20")
+        <pre><code class="language-python">In [1]: len("'T'*20")
 Out[1]: 6</code></pre>
 
         <p>
             If we were to describe Alice's sequence in Python, it would be quite complex (or literal) and the description would probably be equal to or longer than 20 characters. Another thing to keep in mind is that the description language matters too. If we were to replicate the Python description for Bob's sequence in Javascript, we would get the following description:
         </p>
 
-        <pre><code>>> "T".repeat(20)
+        <pre><code class="language-python">>> "T".repeat(20)
 "TTTTTTTTTTTTTTTTTTTT"
 
 >> "\"T\".repeat(20)".length
@@ -387,7 +390,7 @@ Out[1]: 6</code></pre>
     </main>
 
     <footer>
-        © 2024 Sarthak Munshi
+        © 2025 Sarthak Munshi
     </footer>
 
     <script>
