@@ -1,283 +1,593 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>On Provenance of Pictures - @kingroryg</title>
-    <style>
-        body {
-            font-family: 'Georgia', serif;
-            background-color: #ffffff;
-            color: #333333;
-            line-height: 1.7;
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            transition: all 0.5s ease;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>On Provenance of Pictures — Sarthak Munshi</title>
+  <meta name="description" content="An essay on AI-generated imagery, visual trust, provenance, and the future of photography." />
 
-        header {
-            margin-bottom: 40px;
-            border-bottom: 1px solid #eeeeee;
-            padding-bottom: 20px;
-        }
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
 
-        h1 {
-            font-weight: normal;
-            font-size: 36px;
-            color: #555555;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap');
 
-        .links {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-        }
+    * { box-sizing: border-box; }
 
-        .links a {
-            color: #4b6584;
-            text-decoration: none;
-            border-bottom: 1px dotted #4b6584;
-        }
+    :root {
+      --linen: #f6f0e4;
+      --ivory: #fffdf7;
+      --paper: #fcfaf3;
+      --ink: #202531;
+      --ink-soft: #525764;
+      --muted: #8c8d87;
+      --rule: rgba(32, 37, 49, 0.12);
+      --blue: #315d83;
+      --blue-soft: rgba(49, 93, 131, 0.12);
+      --ochre: #b89a63;
+      --olive: #737b63;
+      --umber: #8a6c54;
+      --shadow: 0 28px 80px rgba(34, 38, 45, 0.08);
+      --radius: 24px;
+    }
 
-        .links a:hover {
-            color: #1e3799;
-            border-bottom: 1px solid #1e3799;
-        }
+    html { scroll-behavior: smooth; }
 
-        h2 {
-            font-weight: normal;
-            font-size: 28px;
-            color: #555555;
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 0% 14%, rgba(255, 255, 255, 0.96), transparent 34%),
+        radial-gradient(ellipse at 92% 6%, rgba(49, 93, 131, 0.10), transparent 30%),
+        linear-gradient(120deg, var(--ivory) 0%, var(--linen) 34%, rgba(49, 93, 131, 0.095) 52%, rgba(184, 154, 99, 0.11) 68%, #eee6d7 100%);
+      background-size: 100% 100%, 100% 100%, 220% 220%;
+      animation: quietWash 24s ease-in-out infinite alternate;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.78;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
-        p {
-            font-size: 18px;
-            margin-bottom: 25px;
-        }
+    @keyframes quietWash {
+      0% { background-position: center, center, 0% 45%; }
+      100% { background-position: center, center, 100% 55%; }
+    }
 
-        .post-date {
-            font-size: 14px;
-            color: #777;
-            margin-bottom: 25px;
-        }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23noise)' opacity='.18'/%3E%3C/svg%3E");
+      opacity: 0.105;
+      mix-blend-mode: multiply;
+    }
 
-        .breathing-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 120px;
-            margin: 40px 0;
-            perspective: 1000px;
-        }
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 32vw;
+      height: 100vh;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0));
+      opacity: 0.82;
+    }
 
-        .breathing-circle {
-            width: 80px;
-            height: 80px;
-            background-color: #e6f2ff;
-            border-radius: 50%;
-            position: relative;
-            animation: breathe 8s infinite ease-in-out;
-            box-shadow: 0 0 20px rgba(204, 229, 255, 0.5);
-            cursor: pointer;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        .breathing-circle::before, .breathing-circle::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background-color: rgba(230, 242, 255, 0.7);
-            transform: scale(0);
-            animation: ripple 8s infinite ease-in-out;
-        }
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1040px, calc(100% - 44px));
+      margin: 0 auto;
+      padding: 34px 0 90px;
+    }
 
-        .breathing-circle::after {
-            animation-delay: 1s;
-        }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 26px;
+      margin-bottom: 82px;
+      color: var(--ink-soft);
+      font-size: 13px;
+    }
 
-        @keyframes breathe {
-            0% { transform: scale(1) rotate(0deg); background-color: #e6f2ff; }
-            25% { transform: scale(1.1) rotate(5deg); }
-            50% { transform: scale(1.3) rotate(0deg); background-color: #cce5ff; }
-            75% { transform: scale(1.1) rotate(-5deg); }
-            100% { transform: scale(1) rotate(0deg); background-color: #e6f2ff; }
-        }
+    .name {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
 
-        @keyframes ripple {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(1.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 0; }
-        }
+    .name::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 14px 0 0 var(--ochre);
+    }
 
-        .breathing-text {
-            position: absolute;
-            text-align: center;
-            width: 100%;
-            bottom: -30px;
-            font-size: 14px;
-            color: #777;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
 
-        .breathing-container:hover .breathing-text {
-            opacity: 1;
-        }
+    .nav a,
+    article a,
+    .footer-links a,
+    .back-link {
+      border-bottom: 1px solid transparent;
+      transition: color 160ms ease, border-color 160ms ease;
+    }
 
-        footer {
-            margin-top: 60px;
-            padding-top: 20px;
-            font-size: 14px;
-            color: #999999;
-            text-align: center;
-            border-top: 1px solid #eeeeee;
-        }
+    .nav a:hover,
+    article a:hover,
+    .footer-links a:hover,
+    .back-link:hover {
+      color: var(--blue);
+      border-color: rgba(49, 93, 131, 0.28);
+    }
 
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #4b6584;
-            text-decoration: none;
-            border-bottom: 1px dotted #4b6584;
-        }
+    .post-shell {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 740px);
+      gap: 72px;
+      align-items: start;
+    }
 
-        .back-link:hover {
-            color: #1e3799;
-            border-bottom: 1px solid #1e3799;
-        }
+    .post-aside {
+      position: sticky;
+      top: 32px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
 
-        .video-container {
-            text-align: center;
-            margin: 30px 0;
-        }
+    .post-aside .label {
+      color: var(--olive);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
 
-        blockquote {
-            border-left: 3px solid #cce5ff;
-            padding-left: 20px;
-            margin: 30px 0;
-            font-style: italic;
-            color: #555;
-        }
+    .botanical-mark {
+      width: 112px;
+      height: 158px;
+      margin: 28px 0 30px;
+      opacity: 0.72;
+      filter: drop-shadow(0 18px 28px rgba(34, 38, 45, 0.05));
+    }
 
-        .image-container {
-            text-align: center;
-            margin: 30px 0;
-        }
+    .botanical-mark svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
 
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
+    .aside-rule {
+      width: 38px;
+      height: 1px;
+      background: rgba(115, 123, 99, 0.38);
+      margin: 22px 0;
+    }
 
-        ul {
-            margin-bottom: 25px;
-        }
+    article {
+      min-width: 0;
+    }
 
-        li {
-            margin-bottom: 10px;
-        }
-    </style>
-    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+    .post-header {
+      padding-bottom: 42px;
+      margin-bottom: 44px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .kicker {
+      margin-bottom: 22px;
+      color: var(--olive);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      color: var(--ink);
+      font-family: Newsreader, Georgia, serif;
+      font-size: clamp(52px, 8vw, 94px);
+      font-weight: 300;
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+    }
+
+    .post-dek {
+      max-width: 650px;
+      margin: 28px 0 0;
+      color: var(--ink-soft);
+      font-size: 19px;
+      line-height: 1.78;
+    }
+
+    .post-meta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--ochre);
+    }
+
+    h2 {
+      margin: 72px 0 22px;
+      color: var(--ink);
+      font-family: Newsreader, Georgia, serif;
+      font-size: clamp(34px, 4.8vw, 54px);
+      font-weight: 300;
+      line-height: 1.04;
+      letter-spacing: -0.045em;
+    }
+
+    p {
+      margin: 0 0 26px;
+    }
+
+    article a {
+      color: var(--blue);
+      border-color: rgba(49, 93, 131, 0.22);
+    }
+
+    strong { font-weight: 600; }
+
+    em { color: var(--ink-soft); }
+
+    ul {
+      margin: 0 0 30px;
+      padding-left: 1.2rem;
+      color: var(--ink-soft);
+    }
+
+    li { margin-bottom: 12px; }
+
+    blockquote {
+      position: relative;
+      margin: 42px 0;
+      padding: 28px 30px 28px 34px;
+      border-left: 3px solid var(--ochre);
+      border-radius: 0 20px 20px 0;
+      background: rgba(255, 253, 247, 0.48);
+      color: var(--ink-soft);
+      font-family: Newsreader, Georgia, serif;
+      font-size: 22px;
+      line-height: 1.55;
+      letter-spacing: -0.012em;
+    }
+
+    .image-container,
+    .video-container {
+      margin: 42px 0;
+    }
+
+    .image-container img {
+      display: block;
+      max-width: 100%;
+      width: min(100%, 680px);
+      height: auto;
+      margin: 0 auto;
+      border-radius: 22px;
+      border: 1px solid var(--rule);
+      background: rgba(255, 253, 247, 0.62);
+      box-shadow: var(--shadow);
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      border-radius: 22px;
+      background: rgba(255, 253, 247, 0.62);
+      box-shadow: var(--shadow);
+    }
+
+    .video-frame::before {
+      content: "";
+      display: block;
+      padding-top: 56.25%;
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .tweet-frame {
+      margin: 42px 0;
+      padding: 24px;
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(252, 250, 243, 0.34)),
+        var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .tweet-frame blockquote {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .callout {
+      position: relative;
+      margin: 42px 0;
+      padding: 28px 30px;
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(252, 250, 243, 0.34)),
+        var(--paper);
+      box-shadow: var(--shadow);
+      color: var(--ink-soft);
+    }
+
+    .callout::before {
+      content: "";
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 14px 0 0 var(--ochre);
+    }
+
+    .callout ul {
+      margin: 10px 0 0;
+    }
+
+    .back-link {
+      display: inline-flex;
+      margin-top: 36px;
+      color: var(--blue);
+      font-size: 14px;
+      border-color: rgba(49, 93, 131, 0.22);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 28px;
+      margin-top: 86px;
+      padding-top: 34px;
+      border-top: 1px solid var(--rule);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    ::selection {
+      background: rgba(49, 93, 131, 0.16);
+      color: var(--ink);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body { animation: none; }
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        width: min(100% - 30px, 720px);
+        padding-top: 24px;
+      }
+
+      .nav {
+        align-items: flex-start;
+        margin-bottom: 58px;
+      }
+
+      .post-shell {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .post-aside {
+        position: static;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        border-bottom: 1px solid var(--rule);
+        padding-bottom: 28px;
+      }
+
+      .botanical-mark {
+        width: 82px;
+        height: 112px;
+        margin: 0;
+        flex: 0 0 auto;
+      }
+
+      .aside-rule,
+      .post-aside p { display: none; }
+
+      .post-header { margin-bottom: 38px; }
+    }
+
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+
+      .nav {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+        gap: 16px;
+      }
+
+      h1 { font-size: clamp(48px, 15vw, 72px); }
+
+      .post-dek { font-size: 17px; }
+
+      h2 { margin-top: 58px; }
+
+      blockquote {
+        padding: 24px;
+        font-size: 20px;
+      }
+
+      .tweet-frame,
+      .callout { padding: 22px; }
+
+      footer { display: grid; }
+
+      .footer-links { justify-content: flex-start; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>@kingroryg</h1>
-    </header>
+  <main class="page">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="name" href="/">Sarthak Munshi</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="../archive.html">Archive</a>
+        <a href="mailto:sarthakm@pm.me">Email</a>
+      </div>
+    </nav>
 
-    <main>
-        <h1>On Provenance of Pictures</h1>
-        <div class="post-date">August 25, 2024</div>
+    <div class="post-shell">
+      <aside class="post-aside" aria-label="Post note">
+        <div>
+          <div class="label">Essay</div>
+          <p>A note on image provenance, visual evidence, AI cameras, and what remains trustworthy after the photograph becomes editable.</p>
+          <div class="aside-rule"></div>
+          <p>Photography as witness, engineering as chain of trust.</p>
+        </div>
+        <div class="botanical-mark" aria-hidden="true">
+          <svg viewBox="0 0 150 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M75 198C76 162 78 124 74 86C72 62 65 36 46 18" stroke="#737b63" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M76 130C103 117 123 95 132 67C107 68 84 89 76 130Z" fill="#eef1e6" stroke="#737b63" stroke-width="1"/>
+            <path d="M73 93C47 80 28 59 18 33C43 32 66 53 73 93Z" fill="#f3eadb" stroke="#b89a63" stroke-width="1"/>
+            <path d="M77 164C55 153 39 136 29 114C52 112 70 128 77 164Z" fill="#eef1e6" stroke="#737b63" stroke-width="1"/>
+            <path d="M78 74C97 61 108 45 113 24C94 25 80 43 78 74Z" fill="#f8f4ea" stroke="#315d83" stroke-width="1"/>
+          </svg>
+        </div>
+      </aside>
 
-        <p>
-            Google's Pixel 9 lineup, unveiled last week, has garnered impressive reviews. Google has made a point to plaster AI all over this release. What intrigued me were some of the AI features that were announced. Take a look at some of these in the video below:
-        </p>
+      <article>
+        <header class="post-header">
+          <div class="kicker">Images · AI · provenance</div>
+          <h1>On Provenance of Pictures</h1>
+          <p class="post-dek">As image generation moves into everyday cameras, photography stops being simple evidence and starts requiring a chain of trust.</p>
+          <div class="post-meta">
+            <span>August 25, 2024</span>
+            <span class="dot" aria-hidden="true"></span>
+            <span>@kingroryg</span>
+          </div>
+        </header>
+
+        <p>Google's Pixel 9 lineup, unveiled last week, has garnered impressive reviews. Google has made a point to plaster AI all over this release. What intrigued me were some of the AI features that were announced. Take a look at some of these in the video below:</p>
 
         <div class="video-container">
-            <iframe width="700" height="400" src="https://www.youtube-nocookie.com/embed/63EVXf_S4WQ?si=3ntT-RHQ4oygKIMu&amp;start=325" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <div class="video-frame">
+            <iframe src="https://www.youtube-nocookie.com/embed/63EVXf_S4WQ?si=3ntT-RHQ4oygKIMu&amp;start=325" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
         </div>
 
-        <p>
-            We must pause to consider the implications of AI's growing presence in our pockets. While these image models have existed for quite some time in an experimental setting, putting them in the hands of millions of consumers is bound to unleash a whole different challenge. The major one being, how do you prove the provenance of non-AI generated images?
-        </p>
+        <p>We must pause to consider the implications of AI's growing presence in our pockets. While these image models have existed for quite some time in an experimental setting, putting them in the hands of millions of consumers is bound to unleash a whole different challenge. The major one being, how do you prove the provenance of non-AI generated images?</p>
 
-        <p>
-            In our digital age, we must question the very essence of photography. Traditionally, a photograph served as evidence of reality, a frozen moment in time. However, AI features like those in the latest smartphones challenge this fundamental concept. As AI algorithms increasingly blur the line between captured and generated imagery, we face philosophical quandaries: What constitutes authentic visual representation? How will we navigate a world where the camera might no longer be a reliable witness to reality?
-        </p>
+        <p>In our digital age, we must question the very essence of photography. Traditionally, a photograph served as evidence of reality, a frozen moment in time. However, AI features like those in the latest smartphones challenge this fundamental concept. As AI algorithms increasingly blur the line between captured and generated imagery, we face philosophical quandaries: What constitutes authentic visual representation? How will we navigate a world where the camera might no longer be a reliable witness to reality?</p>
 
-        <p>
-            The CEO of Procreate has something to say about this as well:
-        </p>
+        <p>The CEO of Procreate has something to say about this as well:</p>
 
-        <div class="video-container">
-            <blockquote class="twitter-tweet">
-                <p lang="en" dir="ltr">We're never going there. Creativity is made, not generated.<br>You can read more at <a href="https://t.co/9Fgh460KVu">https://t.co/9Fgh460KVu</a> ✨ <a href="https://twitter.com/hashtag/procreate?src=hash&amp;ref_src=twsrc%5Etfw">#procreate</a> <a href="https://twitter.com/hashtag/noaiart?src=hash&amp;ref_src=twsrc%5Etfw">#noaiart</a> <a href="https://t.co/AnLVPgWzl3">pic.twitter.com/AnLVPgWzl3</a></p>&mdash; Procreate (@Procreate) <a href="https://twitter.com/Procreate/status/1825311104584802470?ref_src=twsrc%5Etfw">August 18, 2024</a>
-            </blockquote>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <div class="tweet-frame">
+          <blockquote class="twitter-tweet">
+            <p lang="en" dir="ltr">We're never going there. Creativity is made, not generated.<br>You can read more at <a href="https://t.co/9Fgh460KVu">https://t.co/9Fgh460KVu</a> ✨ <a href="https://twitter.com/hashtag/procreate?src=hash&amp;ref_src=twsrc%5Etfw">#procreate</a> <a href="https://twitter.com/hashtag/noaiart?src=hash&amp;ref_src=twsrc%5Etfw">#noaiart</a> <a href="https://t.co/AnLVPgWzl3">pic.twitter.com/AnLVPgWzl3</a></p>&mdash; Procreate (@Procreate) <a href="https://twitter.com/Procreate/status/1825311104584802470?ref_src=twsrc%5Etfw">August 18, 2024</a>
+          </blockquote>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
 
-        <p>
-            Model providers or device manufacturers are making some efforts to curtail this. For example, Meta's Llama (available via WhatsApp and Instagram) watermarks their AI-generated images as shown below.
-        </p>
+        <p>Model providers or device manufacturers are making some efforts to curtail this. For example, Meta's Llama (available via WhatsApp and Instagram) watermarks their AI-generated images as shown below.</p>
 
         <div class="image-container">
-            <img src="https://raw.githubusercontent.com/lprimeroo/lprimeroo.github.io/master/assets/meta.jpg" alt="Meta AI-generated image with watermark" width="600"/>
+          <img src="https://raw.githubusercontent.com/lprimeroo/lprimeroo.github.io/master/assets/meta.jpg" alt="Meta AI-generated image with watermark" />
         </div>
 
-        <p>
-            This is a futile effort because you have equally good watermark removal models. See: <a href="https://github.com/zuruoke/watermark-removal" target="_blank">https://github.com/zuruoke/watermark-removal</a>. Some other providers, add metadata in their image EXIF data to tag an image as AI-generated. This doesn't work as well because EXIF data can be easily overwritten.
-        </p>
+        <p>This is a futile effort because you have equally good watermark removal models. See: <a href="https://github.com/zuruoke/watermark-removal" target="_blank" rel="noopener">https://github.com/zuruoke/watermark-removal</a>. Some other providers, add metadata in their image EXIF data to tag an image as AI-generated. This doesn't work as well because EXIF data can be easily overwritten.</p>
 
-        <p>
-            This situation presents us with a profound challenge:
-        </p>
+        <p>This situation presents us with a profound challenge:</p>
 
-        <ul>
+        <div class="callout">
+          <ul>
             <li><strong>Technological inadequacy</strong>: Our current tools for distinguishing AI-generated content from authentic imagery are proving insufficient.</li>
             <li><strong>Ethical implications</strong>: The ease of creating and manipulating convincing false imagery threatens the very foundation of visual trust in our society.</li>
             <li><strong>Societal impact</strong>: How do we maintain a shared reality when our visual evidence becomes unreliable?</li>
-        </ul>
+          </ul>
+        </div>
 
-        <p>
-            We need a highly-scalable <em>publicly</em> verifiable chain of trust mechanism for non-AI-generated images. A public repository of signatures of images that are original, were never tampered with, or enhanced using AI. And a verifying mechanism that tracks every change done on top of that image. Sounds like an NFT, doesn't it? Well yes, if we could build a system without all the scammy tokens that just does this one thing right and is standardized by model providers and device manufacturers, where they also own the root of trust, then maybe we have a chance.
-        </p>
+        <p>We need a highly-scalable <em>publicly</em> verifiable chain of trust mechanism for non-AI-generated images. A public repository of signatures of images that are original, were never tampered with, or enhanced using AI. And a verifying mechanism that tracks every change done on top of that image. Sounds like an NFT, doesn't it? Well yes, if we could build a system without all the scammy tokens that just does this one thing right and is standardized by model providers and device manufacturers, where they also own the root of trust, then maybe we have a chance.</p>
 
-        <p>
-            In the meantime, I find solace in my photographic device, a bastion of inherent trustworthiness. As you may have guessed, I'm referring to the venerable film camera, a testament to the tangible and the authentic in an increasingly digitized world.
-        </p>
+        <p>In the meantime, I find solace in my photographic device, a bastion of inherent trustworthiness. As you may have guessed, I'm referring to the venerable film camera, a testament to the tangible and the authentic in an increasingly digitized world.</p>
 
         <div class="image-container">
-            <img src="https://raw.githubusercontent.com/lprimeroo/lprimeroo.github.io/master/assets/mamiya.jpg" alt="Film camera" width="600"/>
+          <img src="https://raw.githubusercontent.com/lprimeroo/lprimeroo.github.io/master/assets/mamiya.jpg" alt="Film camera" />
         </div>
-    </main>
+
+        <a href="../archive.html" class="back-link">← Return to archive</a>
+      </article>
+    </div>
 
     <footer>
-        © 2025 kingroryg
+      <span>© 2025 Sarthak Munshi</span>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="../archive.html">Archive</a>
+        <a href="mailto:sarthakm@pm.me">Email</a>
+      </div>
     </footer>
-
-    <script>
-        const breathingCircle = document.querySelector('.breathing-circle');
-        
-        breathingCircle.addEventListener('click', () => {
-            // Change animation duration randomly between 5-10 seconds
-            const newDuration = 5 + Math.random() * 5;
-            breathingCircle.style.animationDuration = `${newDuration}s`;
-            
-            // Add a pulse effect
-            breathingCircle.classList.add('pulse');
-            setTimeout(() => {
-                breathingCircle.classList.remove('pulse');
-            }, 1000);
-        });
-    </script>
+  </main>
 </body>
-</html> 
+</html>
