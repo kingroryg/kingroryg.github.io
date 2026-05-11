@@ -272,16 +272,15 @@ Out[1]: 6</code></pre>
         </p>
 
         <p>
-            \[
-            KC(\text{'TTTTTTTTTTTTTTTTTTTT'}) = \\ \min \{|d| : \text{Python}(d) = \text{'TTTTTTTTTTTTTTTTTTTT'}\} = 6 \\ \text{where}, d \in \{\text{'T'*20}, \text{'TTTTTTTTTTTTTTTTTTTT'}, \text{...}\}\\
-            \]
-        </p>
-
-        <p>
-            \[
-            KC(\text{'TTTTTTTTTTTTTTTTTTTT'}) = \\ \min \{|d| : \text{Javascript}(d) = \text{'TTTTTTTTTTTTTTTTTTTT'}\} = 14 \\ \text{where}, d \in \{\text{'T'.repeat(20)}, \text{'TTTTTTTTTTTTTTTTTTTT'}, \text{...}\}
-            \]
-        </p>
+    \[ KC(\text{'TTTTTTTTTTTTTTTTTTTT'}) = \]
+    \[ \min \{|d| : \text{Python}(d) = \text{'TTTTTTTTTTTTTTTTTTTT'}\} = 6 \]
+    \[ \text{where}, d \in \{\text{'T'*20}, \text{'TTTTTTTTTTTTTTTTTTTT'}, \text{...}\} \]
+</p>
+<p>
+    \[ KC(\text{'TTTTTTTTTTTTTTTTTTTT'}) = \]
+    \[ \min \{|d| : \text{Javascript}(d) = \text{'TTTTTTTTTTTTTTTTTTTT'}\} = 14 \]
+    \[ \text{where}, d \in \{\text{'T'.repeat(20)}, \text{'TTTTTTTTTTTTTTTTTTTT'}, \text{...}\} \]
+</p>
 
         <hr>
 
@@ -290,7 +289,7 @@ Out[1]: 6</code></pre>
         </div>
         
         <div class="image-container">
-            <img src="https://raw.githubusercontent.com/kingroryg/kingroryg.github.io/refs/heads/main/posts/kc.png" alt="Methodology" width="600"/>
+            <img src="https://raw.githubusercontent.com/kingroryg/kingroryg.github.io/refs/heads/main/posts/kc.png" alt="Methodology" width="800"/>
         </div>
         <blockquote>
             The interesting number paradox revolves around the claim that all natural numbers are interesting. 1 is the first number, so that is interesting. 2 is the first even number. 3 is the first odd prime number. 4 is interesting because 4=2×2 and 4=2+2. We can continue in this fashion and find interesting properties for many numbers. At some point we might come to some number that does not seem to have an interesting property. We can call that number the first uninteresting number. But that, in itself, is an interesting property. In conclusion, the uninteresting number is, in fact, interesting! <a href="https://nautil.us/kolmogorov-complexity-and-our-search-for-meaning-237158/">[source]</a>
@@ -301,6 +300,10 @@ Out[1]: 6</code></pre>
         </p>
 
         <h2>Eliminating Language Dependency</h2>
+
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/kingroryg/kingroryg.github.io/refs/heads/main/posts/kc2.png" alt="Methodology" width="800"/>
+        </div>
 
         <p>
             Currently, we have a strong dependency on the type of language being used to describe the string and that doesn't attest this mathematical representation with consistency. In other words, we need to define complexity such that the definition does not change based on the \(L\) we pick and depends only on the string. Changing from Python to Javascript in the example above changed our values. So, how do we generalize this and make it language-agnostic? To alleviate this issue, let's assume that there exists a universal language \(U\) such that it always gives us the shortest description length for all strings. This would imply,
