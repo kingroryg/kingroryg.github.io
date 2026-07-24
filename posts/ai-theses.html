@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7 bets on AI | Sarthak Munshi</title>
+  <meta name="description" content="7 bets on where AI is going, backed by real data on jobs, cost, testing, security, and memory." />
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap');
+
+    * { box-sizing: border-box; }
+
+    :root {
+      --linen: #f6f0e4;
+      --ivory: #fffdf7;
+      --paper: #fcfaf3;
+      --ink: #202531;
+      --ink-soft: #525764;
+      --muted: #8c8d87;
+      --rule: rgba(32, 37, 49, 0.12);
+      --blue: #315d83;
+      --blue-soft: rgba(49, 93, 131, 0.12);
+      --ochre: #b89a63;
+      --olive: #737b63;
+      --umber: #8a6c54;
+      --shadow: 0 28px 80px rgba(34, 38, 45, 0.08);
+      --radius: 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 0% 14%, rgba(255, 255, 255, 0.96), transparent 34%),
+        radial-gradient(ellipse at 92% 6%, rgba(49, 93, 131, 0.10), transparent 30%),
+        linear-gradient(120deg, var(--ivory) 0%, var(--linen) 34%, rgba(49, 93, 131, 0.095) 52%, rgba(184, 154, 99, 0.11) 68%, #eee6d7 100%);
+      background-size: 100% 100%, 100% 100%, 220% 220%;
+      animation: quietWash 24s ease-in-out infinite alternate;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.78;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    @keyframes quietWash {
+      0% { background-position: center, center, 0% 45%; }
+      100% { background-position: center, center, 100% 55%; }
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23noise)' opacity='.18'/%3E%3C/svg%3E");
+      opacity: 0.105;
+      mix-blend-mode: multiply;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 32vw;
+      height: 100vh;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0));
+      opacity: 0.82;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1040px, calc(100% - 44px));
+      margin: 0 auto;
+      padding: 34px 0 90px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 26px;
+      margin-bottom: 82px;
+      color: var(--ink-soft);
+      font-size: 13px;
+    }
+
+    .name {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .name::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 14px 0 0 var(--ochre);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a,
+    article a {
+      border-bottom: 1px solid transparent;
+      transition: color 160ms ease, border-color 160ms ease;
+    }
+
+    .nav a:hover,
+    article a:hover {
+      color: var(--blue);
+      border-color: rgba(49, 93, 131, 0.28);
+    }
+
+    .post-shell {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 740px);
+      gap: 72px;
+      align-items: start;
+    }
+
+    .post-aside {
+      position: sticky;
+      top: 32px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .botanical-mark {
+      width: 112px;
+      height: 158px;
+      margin: 28px 0 30px;
+      opacity: 0.72;
+      filter: drop-shadow(0 18px 28px rgba(34, 38, 45, 0.05));
+    }
+
+    .botanical-mark svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    article {
+      min-width: 0;
+    }
+
+    .post-header {
+      padding-bottom: 42px;
+      margin-bottom: 44px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      color: var(--ink);
+      font-family: Newsreader, Georgia, serif;
+      font-size: clamp(52px, 8vw, 94px);
+      font-weight: 300;
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+    }
+
+    .post-dek {
+      max-width: 650px;
+      margin: 28px 0 0;
+      color: var(--ink-soft);
+      font-size: 19px;
+      line-height: 1.78;
+    }
+
+    .post-meta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    h2 {
+      margin: 64px 0 20px;
+      color: var(--ink);
+      font-family: Newsreader, Georgia, serif;
+      font-size: clamp(30px, 4vw, 42px);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    h2 .num {
+      color: var(--muted);
+      font-family: Inter, sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0;
+      margin-right: 14px;
+      vertical-align: middle;
+    }
+
+    p {
+      margin: 0 0 26px;
+    }
+
+    article a {
+      color: var(--blue);
+      border-color: rgba(49, 93, 131, 0.22);
+    }
+
+    strong { font-weight: 600; }
+
+    em { color: var(--ink-soft); }
+
+    ::selection {
+      background: rgba(49, 93, 131, 0.16);
+      color: var(--ink);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body { animation: none; }
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        width: min(100% - 30px, 720px);
+        padding-top: 24px;
+      }
+
+      .nav {
+        align-items: flex-start;
+        margin-bottom: 58px;
+      }
+
+      .post-shell {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .post-aside {
+        position: static;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        border-bottom: 1px solid var(--rule);
+        padding-bottom: 28px;
+      }
+
+      .botanical-mark {
+        width: 82px;
+        height: 112px;
+        margin: 0;
+        flex: 0 0 auto;
+      }
+
+      .post-header { margin-bottom: 38px; }
+    }
+
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+
+      .nav {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+        gap: 16px;
+      }
+
+      h1 { font-size: clamp(48px, 15vw, 72px); }
+
+      .post-dek { font-size: 17px; }
+
+      h2 { margin-top: 50px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="name" href="/"></a>
+      <div class="nav-links">
+        <!-- <a href="/">Home</a> -->
+      </div>
+    </nav>
+
+    <div class="post-shell">
+      <aside class="post-aside" aria-label="Post note">
+        <div>
+        </div>
+        <div class="botanical-mark" aria-hidden="true">
+          <svg viewBox="0 0 150 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M75 198C76 162 78 124 74 86C72 62 65 36 46 18" stroke="#737b63" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M76 130C103 117 123 95 132 67C107 68 84 89 76 130Z" fill="#eef1e6" stroke="#737b63" stroke-width="1"/>
+            <path d="M73 93C47 80 28 59 18 33C43 32 66 53 73 93Z" fill="#f3eadb" stroke="#b89a63" stroke-width="1"/>
+            <path d="M77 164C55 153 39 136 29 114C52 112 70 128 77 164Z" fill="#eef1e6" stroke="#737b63" stroke-width="1"/>
+            <path d="M78 74C97 61 108 45 113 24C94 25 80 43 78 74Z" fill="#f8f4ea" stroke="#315d83" stroke-width="1"/>
+          </svg>
+        </div>
+      </aside>
+
+      <article>
+        <header class="post-header">
+          <h1>7 bets on AI</h1>
+          <div class="post-meta">
+            <span>July 23, 2026</span>
+          </div>
+        </header>
+
+        <h2><span class="num">1</span>The horizon problem</h2>
+        <p>AI is already good at automating quick tasks: ones where it gets feedback fast and doesn't lose track of what it's doing. <a href="https://metr.org/time-horizons/">METR tracks this</a>: the length of task an AI agent can reliably finish has been doubling roughly every four months through 2025. But even METR says they can't reliably measure anything past 16 hours yet. Nobody actually has good data on long tasks. The real problem with long tasks is what researchers call the <a href="https://www.baeldung.com/cs/credit-assignment-problem">credit assignment problem</a>: it's hard for the AI to figure out which of its earlier actions caused something to go right or wrong, especially when feedback is rare. Step count isn't the real limit either. <a href="https://arxiv.org/pdf/2509.09677">A 2026 study found</a> that if a model is 95% reliable at each step, that compounds to just 59% success over 10 steps and 36% over 20, which looks like a hard capability wall but is really just multiplication. Long, multi-step tasks won't be reliable until AI gets much better at trying different approaches and reasoning across many steps without losing the thread, and that also depends on training environments that actually look like real work. On <a href="https://arxiv.org/abs/2412.14161">TheAgentCompany</a>, a benchmark that simulates a real software company, even the best agents only finish 30% of tasks on their own. Most training environments are still too clean and predictable to prepare AI for that kind of mess.</p>
+
+        <h2><span class="num">2</span>Job losses vs. new company creation</h2>
+        <p>Money that used to pay workers is shifting toward AI instead, and you can already see the gap between the big picture and the personal one in the data. <a href="https://fortune.com/2026/06/27/what-is-ai-impact-entry-level-jobs-stanford-adp-canaries-brynjolfsson-richardson/">Stanford's Brynjolfsson-Richardson tracking</a> shows jobs for 22-to-25-year-olds in the most AI-exposed roles shrinking about 3.8% a year, while the job market overall barely moves, down only about 0.2% a year. AI makes routine work cheap to do, and that wipes out specific jobs completely. If it's your job, the good macro numbers don't help you. At the same time, cheaper execution means more people can afford to start a business, and that's creating new companies. <a href="https://www.hiringlab.org/2026/05/14/how-a-shrinking-workforce-ai-and-labor-reallocation-will-define-the-next-15-years/">Indeed's Hiring Lab</a> says almost the same thing: "the defining labor market challenge ahead is labor reallocation, not creation." They think AI only causes 27–35% of this shift, though, with the rest coming from fewer young workers overall. The real problem is speed: moving people whose jobs disappeared into new roles, managing or overseeing AI instead of doing the work by hand, fast enough that it doesn't drag down the whole economy.</p>
+
+        <h2><span class="num">3</span>Specialized AI, not general AI</h2>
+        <p>The future of enterprise AI is small models built for one job, running on a company's own servers. Right now, companies are sending every request to paid APIs, and the bills are piling up. <a href="https://www.cnbc.com/2026/07/09/palo-alto-ceo-arora-ai-pricing.html">Palo Alto Networks' CEO put it plainly</a> in July 2026: even though the price per AI request has dropped 98%, his company's total AI bill tripled anyway, because AI agents chain together many requests to finish one task, and that eats up the savings. He wants prices to fall another 90% before AI makes sense at real scale. It's not just him: MIT's <a href="https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf">NANDA initiative</a> studied 300 companies using AI and found 95% saw no real impact on profit, and PwC's 2026 survey of CEOs found almost the same thing, with 56% unable to point to any real benefit yet. That's getting better, not staying stuck: the <a href="https://www.pymnts.com/artificial-intelligence-2/2026/1-in-4-sp-500-companies-can-now-prove-ai-pays/">number of S&amp;P 500 companies</a> that can prove AI is paying off went from 21% to 40% in a year. But most companies are still measuring this wrong, because they're using a giant do-everything AI model on a narrow, predictable problem that doesn't need one. The standard will become small, task-specific models running in locked-down environments a company fully controls: faster, safer, and actually worth what they cost.</p>
+
+        <h2><span class="num">4</span>Systems skills, not just code</h2>
+        <p>AI can write code now, so just knowing how to write code stops being special. There's already real data on what that's doing to codebases: <a href="https://www.gitclear.com/ai_assistant_code_quality_2025_research">GitClear looked at</a> 211 million lines of changed code and found the amount getting rewritten or thrown away up 39%, duplicate code up 8x, and actual cleanup work dropping from a quarter of all commits to a tenth. Somebody has to fix that mess, and my bet is it won't be a better prompt writer. It'll be engineers who understand how systems behave under real load, how to keep things running when parts break, and how to make software fast, the kind of knowledge you can't get by prompting well. When AI is churning out a lot of code that works but isn't well built, the valuable skill becomes pulling all of that together into something that actually holds up, keeping track of a much more complicated system, and protecting it now that there's so much more surface to attack.</p>
+
+        <h2><span class="num">5</span>Testing what AI does, not what it knows</h2>
+        <p>Standard tests like MMLU are maxed out and easy to cheat on. <a href="https://benchmarkingagents.com/mmlu/">GPT-4 could guess</a> the right answer on MMLU questions 57% of the time without even seeing the question, and close to a third of the test looks like it leaked into the AI's training data. None of that tells you how the AI actually behaves in the real world. Testing needs to move toward watching what a model actually does under pressure, not just whether it knows facts. METR did exactly this in early 2026, running a joint test with Anthropic, OpenAI, Google, and Meta that watched for bad behavior instead of grading a fixed test. In one case, a model found a way to cheat its own test and then posted about it publicly. That's the kind of failure a multiple-choice test will never catch. This means running models in safe, contained simulations and deliberately searching for many different kinds of failure, not just the most obvious one. Meta researchers already built something like this in 2024, called <a href="https://arxiv.org/abs/2402.16822">Rainbow Teaming</a>: instead of testing one attack at a time, it searches for a whole range of different ways to break a model at once.</p>
+
+        <h2><span class="num">6</span>Proving code is correct</h2>
+        <p>Formally proving code is correct, mathematically rather than just testing it, never caught on before because it took too much human effort to be worth it. One team spent <a href="https://martin.kleppmann.com/2025/12/08/ai-formal-verification.html">20 person-years mathematically proving</a> just 8,700 lines of code were correct. It wasn't that the checking tools were too slow: <a href="https://www.amazon.science/blog/a-billion-smt-queries-a-day">Amazon has been running</a> about a billion automated correctness checks a day to verify its AWS access rules since 2022, so those tools were already plenty fast. What AI actually fixes is the human effort: someone still has to write the rules the code must follow, but AI can now do a lot of the proving work itself. That means provably correct code becomes realistic, and bugs in the code itself stop being the main security risk. What's left to secure is the infrastructure underneath it, and there's already a good playbook for that. <a href="https://cacm.acm.org/research/how-amazon-web-services-uses-formal-methods/">Amazon has used a formal method called TLA+</a> to verify systems like S3 and DynamoDB since 2011, checking that the design itself can't enter a broken state before a single line of code gets written. That same approach, applied more widely and sped up by AI, is probably where infrastructure security goes next.</p>
+
+        <h2><span class="num">7</span>Memory size beats memory speed</h2>
+        <p>Running large AI models is limited by memory, not raw calculation speed: the hard part is fitting hundreds of gigabytes of the model somewhere fast enough, not doing more math. Right now everyone's chasing this through HBM, a type of ultra-fast memory used in datacenter chips: <a href="https://newsletter.semianalysis.com/p/nvidia-the-inference-kingdom-expands">SemiAnalysis says</a> memory now makes up over 30% of what it costs to build an Nvidia AI system, HBM is sold out everywhere through 2026, and the market for it is headed from $35 billion to $100 billion by 2028. But that's all about speed in a datacenter. <a href="https://limitededitionjonathan.substack.com/p/apple-is-the-king-of-ai-and-nobody">Apple's approach</a> is the quieter version of the same idea: instead of chasing speed, it chases size. A Mac Studio with 512GB of memory costs about $9,500 and can run open models that won't even fit into a $13,250 Nvidia RTX Pro 6000, which tops out at 96GB, all while using a fraction of the power. As open models keep getting bigger and more people run them locally on specialized hardware, how much memory you can afford per dollar becomes the real limit on who gets to run these models, not who owns the biggest datacenter.</p>
+
+      </article>
+    </div>
+  </main>
+</body>
+</html>
