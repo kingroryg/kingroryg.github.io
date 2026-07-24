@@ -204,7 +204,7 @@
         <div class="links">
             <a href="../index.html">Home</a>
             <a href="https://scholar.google.ca/citations?hl=en&user=0RfLLJcAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">Google Scholar</a>
-            <a href="https://infosec.exchange/@lprimero" target="_blank">Mastadon</a>
+            <a href="https://infosec.exchange/@lprimero" target="_blank">Mastodon</a>
             <a href="https://x.com/kingroryg" target="_blank">X</a>
             <a href="mailto:sarthakm@pm.me">Email</a>
             <a href="../archive.html">Archive</a>
@@ -216,7 +216,7 @@
         <div class="post-date">October 12, 2018</div>
 
         <p>
-            This is a rough checklist of the things to look out when securing an infrastructure. It is by no means a definitive guide and is meant to serve as a checklist for interview prep. Some would call this a 1000 ft view of the security of an infratructure. Additions to this checklist are welcome.
+            This is a rough checklist of the things to look out when securing an infrastructure. It is by no means a definitive guide and is meant as a checklist for interview prep. Some would call this a 1000 ft view of the security of an infrastructure. Additions to this checklist are welcome.
         </p>
 
         <div class="disclaimer">
@@ -231,11 +231,11 @@
                 <li>Enable L4 DDoS protection.</li>
                 <li>Add appropriate rules to filter the traffic.</li>
                 <li>Add HTTP load balancing.</li>
-                <li>Utilize Shared VPC or VPC peering for better segmentation.</li>
+                <li>Use Shared VPC or VPC peering for better segmentation.</li>
                 <li>Protect Public DNS. Explore DNSSEC.</li>
                 <li>Avoid creating massive subnets.</li>
                 <li>Set up VPN access to cloud / private networks.</li>
-                <li>Set up and monitor internet requests through a NAT gateeway.</li>
+                <li>Set up and monitor internet requests through a NAT gateway.</li>
                 <li>Restrict and monitor cross-environment communication.</li>
                 <li>Make sure TLS &gt;= 1.2 is deployed and correctly used across HTTP services.</li>
             </ol>
@@ -257,10 +257,10 @@
                 <li>Protect data using encryption. Avoid broken or deprecated ciphers and libraries.</li>
                 <li>Control the access and usage of data via ACLs/Permissions/etc.</li>
                 <li>Prevent and track data exfiltration. Deploy tools or VPC controls to track this.</li>
-                <li>Deploy tools and measure that indetify and redact PII.</li>
+                <li>Deploy tools and measures that identify and redact PII.</li>
                 <li>Enforce the use of tools such as secrets manager (or others) to protect secrets.</li>
                 <li>Make sure your code/secrets isn't vulnerable to Google dorking.</li>
-                <li>Create a secure data lifecyle policy (Storage -> Retention -> Versioning -> Deletion).</li>
+                <li>Create a secure data lifecycle policy (Storage -> Retention -> Versioning -> Deletion).</li>
             </ol>
         </div>
 
@@ -268,8 +268,8 @@
         <div class="checklist">
             <ol>
                 <li>Deploy software scans for vulnerabilities.</li>
-                <li>Setup appropriate logging, monitoring, and alerting mechanisms.</li>
-                <li>Promote secure by default practices such a secure terraform modules, etc.</li>
+                <li>Set up appropriate logging, monitoring, and alerting mechanisms.</li>
+                <li>Promote secure by default practices such as secure Terraform modules.</li>
                 <li>Allow scanning or other security packages in CI/CD pipelines.</li>
                 <li>Enable static analysis of code and IaC.</li>
                 <li>Promote secure package and container image deployments via managed artifactories.</li>
@@ -284,8 +284,8 @@
             <ol>
                 <li>Verify authN and authZ practices and access control.</li>
                 <li>Review key management practices.</li>
-                <li>Monitoring of compliance violations.</li>
-                <li>Monitoring of network, identity, permissions, etc violations.</li>
+                <li>Monitor compliance violations.</li>
+                <li>Monitor network, identity, and permission violations.</li>
             </ol>
         </div>
 
