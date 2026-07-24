@@ -3,12 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>On Provenance of Pictures — Sarthak Munshi</title>
-  <meta name="description" content="An essay on AI-generated imagery, visual trust, provenance, and the future of photography." />
-
-  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+  <title>A running list for rediscovering Kashmir's native culture — Sarthak Munshi</title>
+  <meta name="description" content="A running list of films and books on Kashmiri Pandit culture and history." />
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap');
@@ -128,7 +124,6 @@
 
     .nav a,
     article a,
-    .footer-links a,
     .back-link {
       border-bottom: 1px solid transparent;
       transition: color 160ms ease, border-color 160ms ease;
@@ -136,7 +131,6 @@
 
     .nav a:hover,
     article a:hover,
-    .footer-links a:hover,
     .back-link:hover {
       color: var(--blue);
       border-color: rgba(49, 93, 131, 0.28);
@@ -252,6 +246,8 @@
       letter-spacing: -0.045em;
     }
 
+    h2:first-of-type { margin-top: 0; }
+
     p {
       margin: 0 0 26px;
     }
@@ -265,119 +261,62 @@
 
     em { color: var(--ink-soft); }
 
-    ul {
-      margin: 0 0 30px;
-      padding-left: 1.2rem;
-      color: var(--ink-soft);
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 22px;
+      margin: 34px 0 10px;
     }
 
-    li { margin-bottom: 12px; }
-
-    blockquote {
-      position: relative;
-      margin: 42px 0;
-      padding: 28px 30px 28px 34px;
-      border-left: 3px solid var(--ochre);
-      border-radius: 0 20px 20px 0;
-      background: rgba(255, 253, 247, 0.48);
-      color: var(--ink-soft);
-      font-family: Newsreader, Georgia, serif;
-      font-size: 22px;
-      line-height: 1.55;
-      letter-spacing: -0.012em;
-    }
-
-    .image-container,
-    .video-container {
-      margin: 42px 0;
-    }
-
-    .image-container img {
+    .tile {
       display: block;
-      max-width: 100%;
-      width: min(100%, 680px);
-      height: auto;
-      margin: 0 auto;
-      border-radius: 22px;
-      border: 1px solid var(--rule);
-      background: rgba(255, 253, 247, 0.62);
-      box-shadow: var(--shadow);
+      border-bottom: none;
     }
 
-    .video-frame {
+    .tile-art {
       position: relative;
-      width: 100%;
+      aspect-ratio: 7 / 10;
       overflow: hidden;
       border: 1px solid var(--rule);
-      border-radius: 22px;
+      border-radius: 18px;
       background: rgba(255, 253, 247, 0.62);
-      box-shadow: var(--shadow);
+      box-shadow: 0 16px 50px rgba(34, 38, 45, 0.06);
+      transition: transform 200ms ease, box-shadow 200ms ease;
     }
 
-    .video-frame::before {
-      content: "";
-      display: block;
-      padding-top: 56.25%;
-    }
-
-    .video-frame iframe {
-      position: absolute;
-      inset: 0;
+    .tile-art img {
       width: 100%;
       height: 100%;
-      border: 0;
+      object-fit: cover;
+      display: block;
     }
 
-    .tweet-frame {
-      margin: 42px 0;
-      padding: 24px;
-      border: 1px solid var(--rule);
-      border-radius: var(--radius);
-      background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(252, 250, 243, 0.34)),
-        var(--paper);
+    .tile:hover .tile-art {
+      transform: translateY(-6px) rotate(-0.6deg) scale(1.015);
       box-shadow: var(--shadow);
     }
 
-    .tweet-frame blockquote {
-      margin: 0;
-      padding: 0;
-      border: 0;
-      border-radius: 0;
-      background: transparent;
-      box-shadow: none;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
+    .tile-caption {
+      margin-top: 14px;
     }
 
-    .callout {
-      position: relative;
-      margin: 42px 0;
-      padding: 28px 30px;
-      border: 1px solid var(--rule);
-      border-radius: var(--radius);
-      background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(252, 250, 243, 0.34)),
-        var(--paper);
-      box-shadow: var(--shadow);
-      color: var(--ink-soft);
+    .tile-caption .tile-title {
+      color: var(--ink);
+      font-family: Newsreader, Georgia, serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      transition: color 160ms ease;
     }
 
-    .callout::before {
-      content: "";
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--blue);
-      box-shadow: 14px 0 0 var(--ochre);
-    }
+    .tile:hover .tile-title { color: var(--blue); }
 
-    .callout ul {
-      margin: 10px 0 0;
+    .tile-caption small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
     }
 
     .back-link {
@@ -388,24 +327,6 @@
       border-color: rgba(49, 93, 131, 0.22);
     }
 
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 28px;
-      margin-top: 86px;
-      padding-top: 34px;
-      border-top: 1px solid var(--rule);
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
     ::selection {
       background: rgba(49, 93, 131, 0.16);
       color: var(--ink);
@@ -413,6 +334,8 @@
 
     @media (prefers-reduced-motion: reduce) {
       body { animation: none; }
+      .tile-art { transition: none; }
+      .tile:hover .tile-art { transform: none; }
     }
 
     @media (max-width: 860px) {
@@ -452,6 +375,8 @@
       .post-aside p { display: none; }
 
       .post-header { margin-bottom: 38px; }
+
+      .tiles { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 560px) {
@@ -473,17 +398,7 @@
 
       h2 { margin-top: 58px; }
 
-      blockquote {
-        padding: 24px;
-        font-size: 20px;
-      }
-
-      .tweet-frame,
-      .callout { padding: 22px; }
-
-      footer { display: grid; }
-
-      .footer-links { justify-content: flex-start; }
+      .tiles { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     }
   </style>
 </head>
@@ -499,9 +414,6 @@
     <div class="post-shell">
       <aside class="post-aside" aria-label="Post note">
         <div>
-          <!-- <p>A note on image provenance, visual evidence, AI cameras, and what remains trustworthy after the photograph becomes editable.</p> -->
-          <!-- <div class="aside-rule"></div> -->
-          <!-- <p>Photography as witness, engineering as chain of trust.</p> -->
         </div>
         <div class="botanical-mark" aria-hidden="true">
           <svg viewBox="0 0 150 210" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -516,74 +428,37 @@
 
       <article>
         <header class="post-header">
-          <div class="kicker">Images · AI · provenance</div>
-          <h1>On Provenance of Pictures</h1>
-          <p class="post-dek">As image generation moves into everyday cameras, photography stops being simple evidence and starts requiring a chain of trust.</p>
+          <div class="kicker">Films · Books · Memory</div>
+          <h1>A running list for rediscovering Kashmir's native culture</h1>
+          <p class="post-dek">I grew up in exile with my Kashmiri Pandit family, inside the culture but with little sense of what life in the Valley was actually like. Most families don't talk about it; ours didn't either. This list is my attempt to find out through films and books. Only substantial work makes it: no propaganda, nothing that leans on the subject instead of the craft. If you're in the same boat, I hope it helps. I'll keep adding to it.</p>
           <div class="post-meta">
-            <span>August 25, 2024</span>
+            <span>July 23, 2026</span>
             <span class="dot" aria-hidden="true"></span>
             <span>@kingroryg</span>
           </div>
         </header>
 
-        <p>Google's Pixel 9 lineup, unveiled last week, has garnered impressive reviews. Google has made a point to plaster AI all over this release. What intrigued me were some of the AI features that were announced. Take a look at some of these in the video below:</p>
-
-        <div class="video-container">
-          <div class="video-frame">
-            <iframe src="https://www.youtube-nocookie.com/embed/63EVXf_S4WQ?si=3ntT-RHQ4oygKIMu&amp;start=325" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-        </div>
-
-        <p>We must pause to consider the implications of AI's growing presence in our pockets. While these image models have existed for quite some time in an experimental setting, putting them in the hands of millions of consumers is bound to unleash a whole different challenge. The major one being, how do you prove the provenance of non-AI generated images?</p>
-
-        <p>In our digital age, we must question the very essence of photography. Traditionally, a photograph served as evidence of reality, a frozen moment in time. However, AI features like those in the latest smartphones challenge this fundamental concept. As AI algorithms increasingly blur the line between captured and generated imagery, we face philosophical quandaries: What constitutes authentic visual representation? How will we navigate a world where the camera might no longer be a reliable witness to reality?</p>
-
-        <p>The CEO of Procreate has something to say about this as well:</p>
-
-        <div class="tweet-frame">
-          <blockquote class="twitter-tweet">
-            <p lang="en" dir="ltr">We're never going there. Creativity is made, not generated.<br>You can read more at <a href="https://t.co/9Fgh460KVu">https://t.co/9Fgh460KVu</a> ✨ <a href="https://twitter.com/hashtag/procreate?src=hash&amp;ref_src=twsrc%5Etfw">#procreate</a> <a href="https://twitter.com/hashtag/noaiart?src=hash&amp;ref_src=twsrc%5Etfw">#noaiart</a> <a href="https://t.co/AnLVPgWzl3">pic.twitter.com/AnLVPgWzl3</a></p>&mdash; Procreate (@Procreate) <a href="https://twitter.com/Procreate/status/1825311104584802470?ref_src=twsrc%5Etfw">August 18, 2024</a>
-          </blockquote>
-          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
-
-        <p>Model providers or device manufacturers are making some efforts to curtail this. For example, Meta's Llama (available via WhatsApp and Instagram) watermarks their AI-generated images as shown below.</p>
-
-        <div class="image-container">
-          <img src="https://raw.githubusercontent.com/lprimeroo/lprimeroo.github.io/master/assets/meta.jpg" alt="Meta AI-generated image with watermark" />
-        </div>
-
-        <p>This is a futile effort because you have equally good watermark removal models. See: <a href="https://github.com/zuruoke/watermark-removal" target="_blank" rel="noopener">https://github.com/zuruoke/watermark-removal</a>. Some other providers, add metadata in their image EXIF data to tag an image as AI-generated. This doesn't work as well because EXIF data can be easily overwritten.</p>
-
-        <p>This situation presents us with a profound challenge:</p>
-
-        <div class="callout">
-          <ul>
-            <li><strong>Technological inadequacy</strong>: Our current tools for distinguishing AI-generated content from authentic imagery are proving insufficient.</li>
-            <li><strong>Ethical implications</strong>: The ease of creating and manipulating convincing false imagery threatens the very foundation of visual trust in our society.</li>
-            <li><strong>Societal impact</strong>: How do we maintain a shared reality when our visual evidence becomes unreliable?</li>
-          </ul>
-        </div>
-
-        <p>We need a highly-scalable <em>publicly</em> verifiable chain of trust mechanism for non-AI-generated images. A public repository of signatures of images that are original, were never tampered with, or enhanced using AI. And a verifying mechanism that tracks every change done on top of that image. Sounds like an NFT, doesn't it? Well yes, if we could build a system without all the scammy tokens that just does this one thing right and is standardized by model providers and device manufacturers, where they also own the root of trust, then maybe we have a chance.</p>
-
-        <p>In the meantime, I find solace in my photographic device, a bastion of inherent trustworthiness. As you may have guessed, I'm referring to the venerable film camera, a testament to the tangible and the authentic in an increasingly digitized world.</p>
-
-        <div class="image-container">
-          <img src="https://raw.githubusercontent.com/lprimeroo/lprimeroo.github.io/master/assets/mamiya.jpg" alt="Film camera" />
+        <div class="tiles">
+          <a class="tile" href="https://letterboxd.com/film/batt-koch/" target="_blank" rel="noopener">
+            <div class="tile-art">
+              <img src="batt-koch.jpg" alt="Batt Koch (2025) poster" />
+            </div>
+            <div class="tile-caption">
+              <div class="tile-title">Batt Koch</div>
+            </div>
+          </a>
+          <a class="tile" href="https://www.goodreads.com/en/book/show/17265065-our-moon-has-blood-clots" target="_blank" rel="noopener">
+            <div class="tile-art">
+              <img src="our-moon-has-blood-clots.jpg" alt="Our Moon Has Blood Clots book cover" />
+            </div>
+            <div class="tile-caption">
+              <div class="tile-title">Our Moon Has Blood Clots</div>
+            </div>
+          </a>
         </div>
 
       </article>
     </div>
-
-    <!-- <footer>
-      <span>© 2025 Sarthak Munshi</span>
-      <div class="footer-links">
-        <a href="/">Home</a>
-        <a href="../archive.html">Archive</a>
-        <a href="mailto:sarthakm@pm.me">Email</a>
-      </div>
-    </footer> -->
   </main>
 </body>
 </html>
