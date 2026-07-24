@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>8 theses on AI | Sarthak Munshi</title>
-  <meta name="description" content="8 theses on where AI is going, backed by real data on jobs, cost, testing, security, memory, and training." />
+  <title>9 theses on AI | Sarthak Munshi</title>
+  <meta name="description" content="9 theses on where AI is going, backed by real data on jobs, cost, testing, security, memory, training, and open models." />
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap');
@@ -329,7 +329,7 @@
 
       <article>
         <header class="post-header">
-          <h1>8 theses on AI</h1>
+          <h1>9 theses on AI</h1>
           <div class="post-meta">
             <span>July 23, 2026</span>
           </div>
@@ -358,6 +358,9 @@
 
         <h2><span class="num">8</span>Environments, not more data</h2>
         <p>The internet is running out of new text to train on. <a href="https://arxiv.org/pdf/2211.04325">A 2022 paper modeling the supply</a> of public human-written text found that if current trends hold, AI labs will use up the entire stock of it somewhere between 2026 and 2032. That's pushing the real bottleneck from data to environments. Instead of scraping more text, labs need places where an AI agent can try something, get a clear pass or fail, and learn from that. <a href="https://simonwillison.net/2025/Dec/19/andrej-karpathy/">Karpathy explained why this works</a>: training a model against automatically verifiable rewards across many environments, like math or code puzzles, makes it develop strategies that look like reasoning. That idea is now a real industry. <a href="https://techcrunch.com/2025/09/21/silicon-valley-bets-big-on-environments-to-train-ai-agents/">Mechanize</a>, founded by three ex-Epoch AI researchers, pays engineers $500,000 a year to build these environments and already works with Anthropic, which has reportedly discussed spending over $1 billion a year on environments of its own. <a href="https://www.eneralabs.com/blog/prime-intellect-130m-enterprise-ai-sovereignty-2026/">Prime Intellect</a>, whose earlier seed round Karpathy personally backed, raised a $130 million Series A in July 2026 at a $1 billion valuation to build what it calls a "Hugging Face for RL environments." Older data-labeling companies like Surge and Mercor are racing to build dedicated environment divisions just to keep up. My bet is that the next few years of AI funding go less toward bigger models and more toward domain experts building narrow, carefully calibrated environments: in law, medicine, engineering, wherever an expert can actually define what success looks like.</p>
+
+        <h2><span class="num">9</span>US open models are catching up</h2>
+        <p>Right now, the leading open-weight models are Chinese. <a href="https://www.marktechpost.com/2026/07/18/kimi-k3-vs-deepseek-v4-pro-vs-glm-5-2-open-trillion-scale-moe-models-compared-on-benchmarks-license-and-serving-cost/">Zhipu's GLM-5.2 and Moonshot's Kimi K3</a> are competitive with the best closed US models: GLM-5.2 scores 62.1 on SWE-bench Pro, and Kimi K3, whose open weights are due out this week, hit #1 on LMArena's Frontend Code Arena within 24 hours of its July 2026 launch. On July 24, 2026, <a href="https://fortune.com/2026/07/24/jensen-huang-open-source-letter-nvidia-kimi/">Jensen Huang used his first ever post on X</a> to share a letter called "Open Weights and American AI Leadership," signed by about 25 companies including Nvidia, Microsoft, Meta, and Hugging Face. It argues the world needs both frontier closed models and frontier open models, and warns against restricting open models before the US catches up. OpenAI and Anthropic didn't sign. The building blocks already exist. The Allen Institute's <a href="https://thenewstack.io/ai2s-olmo-3-pushes-the-envelope-for-open-source-llm-performance/">OLMo 3</a> ships the full training data, every checkpoint, and the training logs alongside the weights, something almost no other lab does. Nvidia's NeMo framework gives anyone the actual training and fine-tuning code, not just a model to download. On Hugging Face, <a href="https://huggingface.co/rico03/Qwen3.6-27B-Claude-Opus-Reasoning-Distilled">one independent developer's 27B fine-tune of Qwen</a>, distilled from Claude Opus, already scores 77.2 on SWE-bench Verified against Claude Opus's own 80.9, with no funding and barely a few hundred downloads so far. My bet is that within a couple of years, openly licensed US models stop being the fallback option and become a real third contender next to Chinese open models and closed US labs.</p>
 
       </article>
     </div>
