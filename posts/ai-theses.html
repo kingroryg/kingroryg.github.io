@@ -7,334 +7,150 @@
   <meta name="description" content="9 theses on where AI is going, backed by real data on jobs, cost, testing, security, memory, training, and open models." />
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap');
+    :root {
+      --ink: #0a0a0a;
+      --paper: #f2ede1;
+      --red: #d42a1c;
+      --rule-faint: #d3ccb9;
+    }
 
     * { box-sizing: border-box; }
 
-    :root {
-      --linen: #f6f0e4;
-      --ivory: #fffdf7;
-      --paper: #fcfaf3;
-      --ink: #202531;
-      --ink-soft: #525764;
-      --muted: #8c8d87;
-      --rule: rgba(32, 37, 49, 0.12);
-      --blue: #315d83;
-      --blue-soft: rgba(49, 93, 131, 0.12);
-      --ochre: #b89a63;
-      --olive: #737b63;
-      --umber: #8a6c54;
-      --shadow: 0 28px 80px rgba(34, 38, 45, 0.08);
-      --radius: 24px;
-    }
-
-    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; }
 
     body {
-      margin: 0;
-      min-height: 100vh;
+      background: var(--paper);
       color: var(--ink);
-      background:
-        radial-gradient(ellipse at 0% 14%, rgba(255, 255, 255, 0.96), transparent 34%),
-        radial-gradient(ellipse at 92% 6%, rgba(49, 93, 131, 0.10), transparent 30%),
-        linear-gradient(120deg, var(--ivory) 0%, var(--linen) 34%, rgba(49, 93, 131, 0.095) 52%, rgba(184, 154, 99, 0.11) 68%, #eee6d7 100%);
-      background-size: 100% 100%, 100% 100%, 220% 220%;
-      animation: quietWash 24s ease-in-out infinite alternate;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 17px;
-      line-height: 1.78;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      font-family: Verdana, Geneva, "Segoe UI", sans-serif;
+      font-size: 13px;
+      line-height: 1.65;
     }
 
-    @keyframes quietWash {
-      0% { background-position: center, center, 0% 45%; }
-      100% { background-position: center, center, 100% 55%; }
-    }
+    a { color: var(--ink); }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23noise)' opacity='.18'/%3E%3C/svg%3E");
-      opacity: 0.105;
-      mix-blend-mode: multiply;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 32vw;
-      height: 100vh;
-      pointer-events: none;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0));
-      opacity: 0.82;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      position: relative;
-      z-index: 1;
-      width: min(1040px, calc(100% - 44px));
+    .frame {
+      max-width: 920px;
       margin: 0 auto;
-      padding: 34px 0 90px;
+      border-left: 6px solid var(--ink);
+      border-right: 6px solid var(--ink);
+      min-height: 100vh;
     }
 
-    .nav {
+    .stripe { height: 6px; background: var(--red); }
+
+    .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 26px;
-      margin-bottom: 82px;
-      color: var(--ink-soft);
-      font-size: 13px;
+      padding: 14px 30px 0;
     }
 
-    .name {
+    .mark {
       display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--ink);
-      font-weight: 500;
-      letter-spacing: -0.01em;
-    }
-
-    .name::before {
-      content: "";
       width: 9px;
       height: 9px;
       border-radius: 50%;
-      background: var(--blue);
-      box-shadow: 14px 0 0 var(--ochre);
+      background: var(--red);
+      box-shadow: 14px 0 0 var(--ink);
     }
 
-    .nav-links {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav a,
-    article a {
-      border-bottom: 1px solid transparent;
-      transition: color 160ms ease, border-color 160ms ease;
-    }
-
-    .nav a:hover,
-    article a:hover {
-      color: var(--blue);
-      border-color: rgba(49, 93, 131, 0.28);
-    }
-
-    .post-shell {
-      display: grid;
-      grid-template-columns: 190px minmax(0, 740px);
-      gap: 72px;
-      align-items: start;
-    }
-
-    .post-aside {
-      position: sticky;
-      top: 32px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .botanical-mark {
-      width: 112px;
-      height: 158px;
-      margin: 28px 0 30px;
-      opacity: 0.72;
-      filter: drop-shadow(0 18px 28px rgba(34, 38, 45, 0.05));
-    }
-
-    .botanical-mark svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
-    article {
-      min-width: 0;
-    }
+    main { padding: 22px 30px 10px; max-width: 720px; }
 
     .post-header {
-      padding-bottom: 42px;
-      margin-bottom: 44px;
-      border-bottom: 1px solid var(--rule);
+      padding-bottom: 18px;
+      margin-bottom: 10px;
+      border-bottom: 4px solid var(--ink);
     }
 
     h1 {
-      max-width: 760px;
-      margin: 0;
-      color: var(--ink);
-      font-family: Newsreader, Georgia, serif;
-      font-size: clamp(52px, 8vw, 94px);
-      font-weight: 300;
-      line-height: 0.98;
-      letter-spacing: -0.055em;
-    }
-
-    .post-dek {
-      max-width: 650px;
-      margin: 28px 0 0;
-      color: var(--ink-soft);
-      font-size: 19px;
-      line-height: 1.78;
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      font-weight: 900;
+      font-size: clamp(28px, 5vw, 42px);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin: 0 0 10px;
     }
 
     .post-meta {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 26px;
-      color: var(--muted);
-      font-size: 13px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 11px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
     h2 {
-      margin: 64px 0 20px;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 34px 0 12px;
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      font-weight: 900;
+      font-size: 18px;
       color: var(--ink);
-      font-family: Newsreader, Georgia, serif;
-      font-size: clamp(30px, 4vw, 42px);
-      font-weight: 300;
-      line-height: 1.08;
-      letter-spacing: -0.04em;
     }
 
-    h2:first-of-type { margin-top: 0; }
+    h2:first-of-type { margin-top: 26px; }
 
     h2 .num {
-      color: var(--muted);
-      font-family: Inter, sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      letter-spacing: 0;
-      margin-right: 14px;
-      vertical-align: middle;
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: var(--red);
+      color: var(--paper);
+      font-size: 12px;
     }
 
     p {
-      margin: 0 0 26px;
+      margin: 0 0 20px;
+      font-size: 13.5px;
     }
 
-    article a {
-      color: var(--blue);
-      border-color: rgba(49, 93, 131, 0.22);
+    a {
+      color: var(--red);
+      font-weight: bold;
+      text-decoration: none;
+      border-bottom: 1px solid var(--red);
     }
 
-    strong { font-weight: 600; }
+    a:hover { color: var(--ink); border-color: var(--ink); }
 
-    em { color: var(--ink-soft); }
-
-    ::selection {
-      background: rgba(49, 93, 131, 0.16);
-      color: var(--ink);
+    footer {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 22px 30px;
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      body { animation: none; }
-    }
-
-    @media (max-width: 860px) {
-      .page {
-        width: min(100% - 30px, 720px);
-        padding-top: 24px;
-      }
-
-      .nav {
-        align-items: flex-start;
-        margin-bottom: 58px;
-      }
-
-      .post-shell {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .post-aside {
-        position: static;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
-        border-bottom: 1px solid var(--rule);
-        padding-bottom: 28px;
-      }
-
-      .botanical-mark {
-        width: 82px;
-        height: 112px;
-        margin: 0;
-        flex: 0 0 auto;
-      }
-
-      .post-header { margin-bottom: 38px; }
-    }
-
-    @media (max-width: 560px) {
-      body { font-size: 16px; }
-
-      .nav {
-        flex-direction: column;
-        gap: 14px;
-      }
-
-      .nav-links {
-        justify-content: flex-start;
-        gap: 16px;
-      }
-
-      h1 { font-size: clamp(48px, 15vw, 72px); }
-
-      .post-dek { font-size: 17px; }
-
-      h2 { margin-top: 50px; }
-    }
+    footer a { color: var(--red); font-weight: bold; text-decoration: none; border: none; }
+    footer a:hover { color: var(--paper); }
   </style>
 </head>
 <body>
-  <main class="page">
-    <nav class="nav" aria-label="Primary navigation">
-      <a class="name" href="/"></a>
-      <div class="nav-links">
-        <!-- <a href="/">Home</a> -->
-      </div>
-    </nav>
+  <div class="frame">
+    <div class="stripe" role="presentation"></div>
 
-    <div class="post-shell">
-      <aside class="post-aside" aria-label="Post note">
-        <div>
-        </div>
-        <div class="botanical-mark" aria-hidden="true">
-          <svg viewBox="0 0 150 210" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M75 198C76 162 78 124 74 86C72 62 65 36 46 18" stroke="#737b63" stroke-width="1.3" stroke-linecap="round"/>
-            <path d="M76 130C103 117 123 95 132 67C107 68 84 89 76 130Z" fill="#eef1e6" stroke="#737b63" stroke-width="1"/>
-            <path d="M73 93C47 80 28 59 18 33C43 32 66 53 73 93Z" fill="#f3eadb" stroke="#b89a63" stroke-width="1"/>
-            <path d="M77 164C55 153 39 136 29 114C52 112 70 128 77 164Z" fill="#eef1e6" stroke="#737b63" stroke-width="1"/>
-            <path d="M78 74C97 61 108 45 113 24C94 25 80 43 78 74Z" fill="#f8f4ea" stroke="#315d83" stroke-width="1"/>
-          </svg>
-        </div>
-      </aside>
+    <div class="topbar">
+      <a class="mark" href="/" aria-label="Home"></a>
+    </div>
+
+    <main>
+      <header class="post-header">
+        <h1>9 theses on AI</h1>
+        <div class="post-meta">July 23, 2026</div>
+      </header>
 
       <article>
-        <header class="post-header">
-          <h1>9 theses on AI</h1>
-          <div class="post-meta">
-            <span>July 23, 2026</span>
-          </div>
-        </header>
-
         <h2><span class="num">1</span>The horizon problem</h2>
         <p>AI is already good at automating quick tasks: ones where it gets feedback fast and doesn't lose track of what it's doing. <a href="https://metr.org/time-horizons/">METR tracks this</a>: the length of task an AI agent can reliably finish has been doubling roughly every four months through 2025. But even METR says they can't reliably measure anything past 16 hours yet. Nobody actually has good data on long tasks. The real problem with long tasks is what researchers call the <a href="https://www.baeldung.com/cs/credit-assignment-problem">credit assignment problem</a>: it's hard for the AI to figure out which of its earlier actions caused something to go right or wrong, especially when feedback is rare. Step count isn't the real limit either. <a href="https://arxiv.org/pdf/2509.09677">A 2026 study found</a> that if a model is 95% reliable at each step, that compounds to just 59% success over 10 steps and 36% over 20, which looks like a hard capability wall but is really just multiplication. Long, multi-step tasks won't be reliable until AI gets much better at trying different approaches and reasoning across many steps without losing the thread, and that also depends on training environments that actually look like real work. On <a href="https://arxiv.org/abs/2412.14161">TheAgentCompany</a>, a benchmark that simulates a real software company, even the best agents only finish 30% of tasks on their own. Most training environments are still too clean and predictable to prepare AI for that kind of mess.</p>
 
@@ -361,9 +177,16 @@
 
         <h2><span class="num">9</span>US open models are catching up</h2>
         <p>Right now, the leading open-weight models are Chinese. <a href="https://www.marktechpost.com/2026/07/18/kimi-k3-vs-deepseek-v4-pro-vs-glm-5-2-open-trillion-scale-moe-models-compared-on-benchmarks-license-and-serving-cost/">Zhipu's GLM-5.2 and Moonshot's Kimi K3</a> are competitive with the best closed US models: GLM-5.2 scores 62.1 on SWE-bench Pro, and Kimi K3, whose open weights are due out this week, hit #1 on LMArena's Frontend Code Arena within 24 hours of its July 2026 launch. On July 24, 2026, <a href="https://fortune.com/2026/07/24/jensen-huang-open-source-letter-nvidia-kimi/">Jensen Huang used his first ever post on X</a> to share a letter called "Open Weights and American AI Leadership," signed by about 25 companies including Nvidia, Microsoft, Meta, and Hugging Face. It argues the world needs both frontier closed models and frontier open models, and warns against restricting open models before the US catches up. OpenAI and Anthropic didn't sign. The building blocks already exist. The Allen Institute's <a href="https://thenewstack.io/ai2s-olmo-3-pushes-the-envelope-for-open-source-llm-performance/">OLMo 3</a> ships the full training data, every checkpoint, and the training logs alongside the weights, something almost no other lab does. Nvidia's NeMo framework gives anyone the actual training and fine-tuning code, not just a model to download. On Hugging Face, <a href="https://huggingface.co/rico03/Qwen3.6-27B-Claude-Opus-Reasoning-Distilled">one independent developer's 27B fine-tune of Qwen</a>, distilled from Claude Opus, already scores 77.2 on SWE-bench Verified against Claude Opus's own 80.9, with no funding and barely a few hundred downloads so far. My bet is that within a couple of years, openly licensed US models stop being the fallback option and become a real third contender next to Chinese open models and closed US labs.</p>
-
       </article>
-    </div>
-  </main>
+    </main>
+
+    <footer>
+      <a href="https://codeberg.org/kingroryg">Codeberg</a>
+      <a href="https://infosec.exchange/@lprimero">Mastodon</a>
+      <a href="mailto:sarthakm@pm.me">Email</a>
+    </footer>
+
+    <div class="stripe" role="presentation"></div>
+  </div>
 </body>
 </html>
