@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6 AWS WAF and Firewall Manager gotchas — Sarthak Munshi</title>
+  <meta name="description" content="Things AWS's docs don't tell you before you deploy AWS WAF or Firewall Manager, from a first deployment cycle." />
+
+  <style>
+    :root {
+      --ink: #0a0a0a;
+      --paper: #f2ede1;
+      --red: #d42a1c;
+      --rule-faint: #d3ccb9;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Verdana, Geneva, "Segoe UI", sans-serif;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    a { color: var(--ink); }
+
+    .frame {
+      max-width: 920px;
+      margin: 0 auto;
+      border-left: 6px solid var(--ink);
+      border-right: 6px solid var(--ink);
+      min-height: 100vh;
+    }
+
+    .stripe { height: 6px; background: var(--red); }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 30px 0;
+    }
+
+    .mark {
+      display: inline-flex;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 14px 0 0 var(--ink);
+    }
+
+    main { padding: 22px 30px 10px; max-width: 720px; }
+
+    .post-header {
+      padding-bottom: 18px;
+      margin-bottom: 10px;
+      border-bottom: 4px solid var(--ink);
+    }
+
+    h1 {
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      font-weight: 900;
+      font-size: clamp(24px, 4.4vw, 34px);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin: 0 0 10px;
+    }
+
+    .post-dek {
+      max-width: 62ch;
+      margin: 0 0 12px;
+      font-size: 13.5px;
+      color: #3a3628;
+    }
+
+    .post-meta {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 11px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    h2 {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 34px 0 12px;
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      font-weight: 900;
+      font-size: 17px;
+      color: var(--ink);
+    }
+
+    h2:first-of-type { margin-top: 26px; }
+
+    h2 .num {
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: var(--red);
+      color: var(--paper);
+      font-size: 12px;
+    }
+
+    p { margin: 0 0 20px; font-size: 13.5px; }
+
+    a {
+      color: var(--red);
+      font-weight: bold;
+      text-decoration: none;
+      border-bottom: 1px solid var(--red);
+    }
+
+    a:hover { color: var(--ink); border-color: var(--ink); }
+
+    blockquote {
+      margin: 20px 0;
+      padding: 14px 16px;
+      border: 2px solid var(--ink);
+      border-left: 6px solid var(--red);
+      background: #fff;
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    footer {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 22px 30px;
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+    }
+
+    footer a { color: var(--red); font-weight: bold; text-decoration: none; border: none; }
+    footer a:hover { color: var(--paper); }
+
+    @media (max-width: 620px) {
+      .frame { border-left-width: 4px; border-right-width: 4px; }
+      .topbar { padding: 12px 16px 0; }
+      main { padding: 16px 16px 6px; }
+      h2 { flex-wrap: wrap; }
+      blockquote { padding: 12px 14px; }
+      footer { padding: 18px 16px; justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="stripe" role="presentation"></div>
+
+    <div class="topbar">
+      <a class="mark" href="/" aria-label="Home"></a>
+    </div>
+
+    <main>
+      <header class="post-header">
+        <h1>6 AWS WAF and Firewall Manager gotchas</h1>
+        <p class="post-dek">Things AWS's docs don't tell you before you deploy, learned the hard way over one deployment cycle.</p>
+        <div class="post-meta">January 10, 2022</div>
+      </header>
+
+      <article>
+        <p>Most recently, <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44228">CVE-2021-44228</a> pushed all of us into adopting slapdash measures to protect our applications. One technique that gained traction was the WAF, or Web Application Firewall. A WAF protects your web applications or APIs against common web exploits that may affect availability, compromise security, or consume excessive resources. AWS supports this via the <a href="https://aws.amazon.com/waf/">AWS WAF</a> offering, and gives payer accounts the flexibility to deploy it centrally across child accounts using <a href="https://aws.amazon.com/firewall-manager/">AWS Firewall Manager</a>. My experience with both offerings is limited, but a single deployment cycle turned up a handful of gotchas that are either hidden in plain sight or missing from the docs entirely. I hope this helps other folks in security or infrastructure make more informed deployments.</p>
+
+        <h2><span class="num">1</span>8KB payloads</h2>
+        <p>If you look at the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-fields.html">AWS docs for WAF</a>, you'll find a red box with this message:</p>
+
+        <blockquote>Only the first 8 KB (8,192 bytes) of the request body are forwarded to AWS WAF for inspection. For information about how to manage this, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/web-request-body-inspection.html">Web request body inspection</a>.</blockquote>
+
+        <p>I was puzzled the first time I read this: all someone needs to do is pad a malicious payload with 8KB of data and AWS WAF will let it through. This <a href="https://osamaelnaggar.com/blog/aws_waf_dangerous_defaults/">blog post</a> demonstrates the problem well. AWS's fix is to block any request with more than 8KB of payload data, which means if your application needs to accept 8KB or more at any point, you're out of luck. Most of us read the docs before deploying an AWS service, but this gotcha is exactly the kind that can quietly break an application in production.</p>
+
+        <h2><span class="num">2</span>Replacement discrepancy</h2>
+        <p>When using AWS Firewall Manager to centrally deploy WAF WebACLs across child accounts, you'll see the following options in the policy configuration stage.</p>
+
+        <p>If you have an ALB or API Gateway resource running without a WAF WebACL in a child account, selecting the auto-remediate option will automatically move that resource behind the WebACL this policy creates. The gotcha is in this line:</p>
+
+        <blockquote>Replace web ACLs that are currently associated with in-scope resources with the web ACLs created by this policy</blockquote>
+
+        <p>In theory, leaving this unchecked means resources behind an existing independent WAF WebACL stay untouched by the Firewall Manager policy. That holds true only if the independent WebACLs are running WAFv2. If they're still on the deprecated WAF Classic, leaving the box unchecked does nothing. I found this out the hard way: a batch of applications behind WAF Classic got moved to the new WAFv2 policy despite the box being unchecked. Most of those WAF Classic instances had custom rules and rate limits, none of which carried over, and their protection broke.</p>
+
+        <p>When I raised this with AWS support, they initially denied it. After they reproduced it themselves, they accepted the bug and suggested using tags to exclude resources from future Firewall Manager policies. Unsurprisingly, none of this is documented anywhere on their site.</p>
+
+        <h2><span class="num">3</span>Migration caveats</h2>
+        <p>Firewall Manager will quietly migrate your resources from WAF Classic to WAFv2 (see above), but there's no easy way to do that migration yourself. AWS does have a <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-migrating-procedure-automatic.html">page</a> walking through migration via a CloudFormation template, with a few caveats attached. That template, or any other migration path, will not carry over your custom rules, managed rules, rate limit rules, or logging, as the docs <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-migrating-caveats.html">note</a>. Makes me wonder if it'd be faster to just spin up your own Terraform or CloudFormation than rely on AWS's half-assed migration steps.</p>
+
+        <h2><span class="num">4</span>False positives</h2>
+        <p>We've run AWS WAF on a number of services over the past few months. We also use the WAF offerings from Fastly, Akamai, and Cloudflare on other projects, and AWS WAF has a noticeably higher false positive rate than any of them. A Web Application Firewall is not a "live and let live" kinda tool. You have to constantly monitor false positives and false negatives and tweak the rules to get the protection you actually want, and AWS WAF is no exception.</p>
+
+        <h2><span class="num">5</span>Bad parsing</h2>
+        <p>We hit a strange bug in production where legitimate multi-part requests with XML data were getting blocked by the WAF. After investigating and confirming with AWS Support, it turns out there's a parsing bug in AWS WAF that, as of this writing, still hasn't been fixed. A compressed XML payload without line breaks gets blocked, but the same payload with line breaks added sails through the WebACL. Definitely one of those head-scratching issues.</p>
+
+        <h2><span class="num">6</span>Extra pennies per month</h2>
+        <p>This gotcha isn't a big one, but it belongs in the "uncomfortable" column. Firewall Manager creates WebACLs in child accounts regardless of whether those accounts have any resources (ALB, API Gateway, etc.) or the replacement box is unchecked. A WebACL costs $5 a month, and a single rule inside it adds another $1. Say you have 10 accounts that don't need a WAF yet but might later, so you've added them as child accounts to the Firewall Manager policy just in case. Until that day comes, you're paying 10 &times; $6 = $60 extra every month. Probably pennies for a company running 100+ accounts that don't need a WAF, but I wanted to put it out there. Thx.</p>
+      </article>
+    </main>
+
+    <footer>
+      <a href="https://github.com/kingroryg">GitHub</a>
+      <a href="https://codeberg.org/kingroryg">Codeberg</a>
+      <a href="https://infosec.exchange/@lprimero">Mastodon</a>
+      <a href="mailto:sarthakm@pm.me">Email</a>
+    </footer>
+
+    <div class="stripe" role="presentation"></div>
+  </div>
+</body>
+</html>
