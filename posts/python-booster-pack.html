@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Booster Pack — Sarthak Munshi</title>
+  <meta name="description" content="A grab bag of lesser-known Python features, tricks, and modules: lru_cache, ipdb, line_profiler, Cython, context managers, generator expressions, and more." />
+
+  <style>
+    :root {
+      --ink: #0a0a0a;
+      --paper: #f2ede1;
+      --red: #d42a1c;
+      --rule-faint: #d3ccb9;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Verdana, Geneva, "Segoe UI", sans-serif;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    a { color: var(--ink); }
+
+    .frame {
+      max-width: 920px;
+      margin: 0 auto;
+      border-left: 6px solid var(--ink);
+      border-right: 6px solid var(--ink);
+      min-height: 100vh;
+    }
+
+    .stripe { height: 6px; background: var(--red); }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 30px 0;
+    }
+
+    .mark {
+      display: inline-flex;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 14px 0 0 var(--ink);
+    }
+
+    main { padding: 22px 30px 10px; max-width: 720px; }
+
+    .post-header {
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+      border-bottom: 4px solid var(--ink);
+    }
+
+    h1 {
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      font-weight: 900;
+      font-size: clamp(24px, 4.4vw, 34px);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin: 0 0 10px;
+    }
+
+    .post-dek {
+      max-width: 62ch;
+      margin: 0 0 12px;
+      font-size: 13.5px;
+      color: #3a3628;
+    }
+
+    .post-meta {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 11px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    h2 {
+      margin: 36px 0 14px;
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      font-weight: 900;
+      font-size: 17px;
+      color: var(--ink);
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 6px;
+    }
+
+    h2:first-of-type { margin-top: 26px; }
+
+    p { margin: 0 0 20px; font-size: 13.5px; }
+
+    a {
+      color: var(--red);
+      font-weight: bold;
+      text-decoration: none;
+      border-bottom: 1px solid var(--red);
+    }
+
+    a:hover { color: var(--ink); border-color: var(--ink); }
+
+    del { color: #6b6555; }
+    sup { line-height: 0; }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: #fff;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      padding: 0.1em 0.36em;
+      font-size: 0.92em;
+    }
+
+    pre {
+      position: relative;
+      margin: 22px 0;
+      padding: 16px 18px;
+      border: 3px solid var(--ink);
+      box-shadow: 5px 5px 0 var(--red);
+      background: #fff !important;
+      overflow-x: auto;
+    }
+
+    pre code {
+      display: block;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      color: var(--ink);
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre;
+    }
+
+    .image-container { margin: 24px 0; text-align: center; }
+
+    .image-container img {
+      display: inline-block;
+      max-width: 100%;
+      height: auto;
+      border: 3px solid var(--ink);
+      box-shadow: 6px 6px 0 var(--red);
+      background: #fff;
+    }
+
+    footer {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 22px 30px;
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+    }
+
+    footer a { color: var(--red); font-weight: bold; text-decoration: none; border: none; }
+    footer a:hover { color: var(--paper); }
+
+    @media (max-width: 620px) {
+      .frame { border-left-width: 4px; border-right-width: 4px; }
+      .topbar { padding: 12px 16px 0; }
+      main { padding: 16px 16px 6px; }
+      pre { padding: 12px 14px; }
+      footer { padding: 18px 16px; justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="stripe" role="presentation"></div>
+
+    <div class="topbar">
+      <a class="mark" href="/" aria-label="Home"></a>
+    </div>
+
+    <main>
+      <header class="post-header">
+        <h1>Python Booster Pack</h1>
+        <p class="post-dek">A grab bag of lesser-known Python features, tricks, and modules I picked up along the way.</p>
+        <div class="post-meta">January 24, 2018</div>
+      </header>
+
+      <article>
+        <p>"Python Booster Pack" is probably the most clickbait-y title you've read for a post that documents a few tips and tricks in Python. Believe me, the content isn't as disappointing as the title. <em>kek</em>. Here I want to explain some of the lesser-known features that Python and some of its modules have to offer, the kind that can change how you code and debug, or bump up your productivity a bit. <em>Not claiming much though</em>. Some of these are hidden in plain sight and call for a proper <em>Eureka!</em> moment.</p>
+
+        <div class="image-container">
+          <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" alt="" />
+        </div>
+
+        <p>I didn't discover or develop any of these. Most of them showed up on my Twitter feed at 2AM, my Reddit feed at 3AM, or a friend's chat at 4AM. Let's begin.</p>
+
+        <h2>Introducing <code>lru_cache()</code></h2>
+
+        <pre><code>from functools import lru_cache
+
+@lru_cache(maxsize=None)
+def fibonacci_with_lru(n):
+    return n if n in [0, 1] else (fibonacci_with_lru(n - 1) + fibonacci_with_lru(n - 2))
+
+def fibonacci(n):
+    return n if n in [0, 1] else (fibonacci(n - 1) + fibonacci(n - 2))</code></pre>
+
+        <p>Go on. Give the code above a whirl in your Jupyter notebook.</p>
+
+        <p>The <code>lru_cache</code> decorator in <code>functools</code> caches, or auto-memoizes, repeated calls using a least-recently-used eviction policy. The <code>maxsize</code> argument decides the max cache size (usually a power of 2). It also has a <code>typed</code> argument which, if set to <code>True</code>, treats <code>3</code> and <code>3.0</code> as two separate numbers.</p>
+
+        <p>In the snippet above, you'll notice a speedup of almost 10<sup>-3</sup> even though the input increased by 10x. This isn't always advisable, and it's no replacement for a faster non-recursive approach, but it's a neat trick during prototyping and has its own use cases, like caching file fetches.</p>
+
+        <h2><code>binding.pry</code> in Python? Hmmm.</h2>
+
+        <p>I've seen countless Ruby developers gush about <code>binding.pry</code>. It's a debugging routine that lets you step through code line by line and inspect variables at each stage. Turns out it exists in Python too (<code>pip install ipdb</code>)!</p>
+
+        <p>Consider a binary search routine we want to examine from the inside.</p>
+
+        <pre><code>import ipdb; debug = ipdb.set_trace
+
+def binary_search(needle, haystack):
+    left, right = 0, len(haystack) - 1
+    while left <= right:
+        mid = left + (right - left) // 2
+        debug();
+        if haystack[mid] == needle:
+            return True
+        elif haystack[mid] > needle:
+            right = mid - 1
+        else:
+            left = mid + 1
+    return False
+
+binary_search(2, [1, 2, 3, 4])
+binary_search(5, [1, 2, 3, 4])</code></pre>
+
+        <p>Notice how we've sneakily placed the <code>debug()</code> call right after the algorithm decides the midpoint.</p>
+
+        <p>The program pauses at <code>debug()</code> and drops you into an interactive session. <code>n</code> steps to the next line, <code>c</code> continues execution. There are other debuggers you can try, but <code>ipdb</code> gives you a proper IPython shell with syntax highlighting and tab-completion, which makes it my favorite.</p>
+
+        <h2>Introducing the <code>LineProfiler</code></h2>
+
+        <p>Ever wondered why your routine takes so long despite writing what feels like efficient code? Spending hours figuring out which part is eating up all the time is injurious to the hair on your head.</p>
+
+        <p>Anyway, if you're on Python 2.7, start with a</p>
+
+        <pre><code>pip install line_profiler</code></pre>
+
+        <p>Python 3 users need to follow,</p>
+
+        <pre><code>pip3 install Cython
+git clone https://github.com/rkern/line_profiler
+cd line_profiler; sudo python3 setup.py install</code></pre>
+
+        <p>Let's take an arbitrary mathematical function as an example. We import the <code>line_profiler</code> and <code>atexit</code> modules and place the <code>@profile</code> decorator over the function we want to profile.</p>
+
+        <pre><code>import numpy as np
+import line_profiler
+from atexit import register
+
+profile = line_profiler.LineProfiler()
+register(profile.print_stats)
+
+@profile
+def math_function(n):
+    x = np.random.normal(size=n)
+    y = np.power(x, 4)
+    z = np.sqrt(y)
+    return np.sum(z)
+
+math_function(7123681)</code></pre>
+
+        <p>Run your script and voil&agrave;: you get a line-by-line breakdown of hits per line (more than 1 for loops), total time, time per hit, and percentage of the function's total time.</p>
+
+        <h2>Images == Numbers</h2>
+
+        <p>An image is nothing but a collection of numbers, so we can use a handy lambda to turn a matrix of numbers into an image. It's fast, lightweight, and gets the job done, which makes it useful for prototyping or poking at a dataset.</p>
+
+        <pre><code>import numpy as np
+from PIL import Image
+
+get_image = lambda x: Image.fromarray(np.uint8(255 * (x - x.min()) / x.ptp()))
+
+get_image(np.random.rand(200, 200))</code></pre>
+
+        <p>In the snippet above, we pass a random 200 x 200 matrix to <code>get_image</code> and get an <del>noise</del> image.</p>
+
+        <h2>Better Python REPL</h2>
+
+        <p>Most Pythonistas may already know this. For those who don't, run</p>
+
+        <pre><code>pip install ptpython</code></pre>
+
+        <p><a href="https://github.com/jonathanslenders/ptpython">Ptpython</a> is a replacement for the traditional Python REPL. It has autocompletion, syntax highlighting, mouse support, multi-line editing, and auto-tabbing. What a package!</p>
+
+        <p>You could also level up your setup by aliasing it to your specific Python distribution.</p>
+
+        <h2>Cython is &lt;3</h2>
+
+        <p>We often run into scripts doing something simple but crunching a lot of data, where getting any real speedup is a pain. Let's see how far we can push this, starting with a plain Python program.</p>
+
+        <pre><code>n = 100000000
+arr = [0.0] * n
+
+for i in range(n):
+    arr[i] = i % 3
+
+print(arr[:10])</code></pre>
+
+        <p>Time taken:</p>
+
+        <pre><code>13.26s user 0.31s system 99% cpu 13.636 total</code></pre>
+
+        <p>Using modifications inspired by Cython, let's convert this program to something like the one below (also change the file extension to <code>.pyx</code>),</p>
+
+        <pre><code>from array import array
+
+cdef int n = 100000000
+cdef object arr = array('d', [0.0]) * n
+cdef double[:] mv = arr
+
+cdef int i
+for i in range(n):
+    mv[i] = i % 3
+
+print(arr[:10])</code></pre>
+
+        <p>Execute it using,</p>
+
+        <pre><code>pip install Cython
+cythonize -b -i filename.pyx
+python -c "import &lt;filename&gt;"</code></pre>
+
+        <p>Time taken:</p>
+
+        <pre><code>0.53s user 0.31s system 86% cpu 0.866 total</code></pre>
+
+        <p>Holy smokes! That's almost 25 times faster than our non-Cython code.</p>
+
+        <div class="image-container">
+          <img src="https://media.giphy.com/media/3XR0chfiSTtAI/giphy.gif" alt="" />
+        </div>
+
+        <p>This happens because Cython creates a native binary that's linked at runtime. I've heard of a few use cases where it gives a speedup of almost 100x. If a few type declarations and giving up some of Python's expressiveness doesn't bother you much, this is a great option for compute-heavy scripts.</p>
+
+        <h2>Named Tuple</h2>
+
+        <p>This is one of the lesser-known data structures in the <code>collections</code> module. Here's how it works.</p>
+
+        <pre><code>from collections import namedtuple
+Candidate = namedtuple('Candidate', 'name age gender')
+candidate_1 = Candidate(name='John Doe', age=35, gender='M')
+
+# Output
+# >>> candidate_1
+# Candidate(name='John Doe', age=35, gender='M')
+# >>> candidate_1.name
+# 'John Doe'
+# >>> candidate_1.age
+# 35
+# >>> candidate_1.gender
+# 'M'</code></pre>
+
+        <p><code>namedtuple</code> is a great option if you want struct-like functionality in Python without reaching for a full class just to hold a few fields.</p>
+
+        <h2>Avoid data structure initializing functions</h2>
+
+        <p>Have a look at the snippet below and think about what it's telling you.</p>
+
+        <pre><code>&gt;&gt;&gt; from timeit import timeit
+
+&gt;&gt;&gt; timeit("x = dict()", number=10000000)
+1.3071075379999968
+
+&gt;&gt;&gt; timeit("x = {}", number=10000000)
+0.37984672199999636
+
+&gt;&gt;&gt; timeit("x = list()", number=10000000)
+1.0812364029999912
+
+&gt;&gt;&gt; timeit("x = []", number=10000000)
+0.285002046999999</code></pre>
+
+        <p>Here we timed the data-structure initializing functions, <code>dict</code> and <code>list</code>, against their symbolic initializers (idk what to call them), running each 10,000,000 times. Using the symbolic initializers gives a 4x to 5x speedup. Worth pointing out next time you're reviewing or writing code.</p>
+
+        <h2>Better function aliases</h2>
+
+        <p>Here we look at <code>functools.partial</code>, which lets you create a new version of a function with one or more arguments already filled in. To convert a number in a different base to decimal, we use <code>int</code> with the <code>base</code> argument. Writing that out as separate functions looks like this.</p>
+
+        <pre><code>def from_binary(x):
+  return int(x, base=2)
+
+def from_octal(x):
+  return int(x, base=8)
+
+def from_hex(x):
+  return int(x, base=16)
+
+print(from_binary('10010')) # prints 18
+print(from_octal('34472')) # prints 14650
+print(from_hex('7e8c9')) # prints 518345</code></pre>
+
+        <p>Using <code>partial</code> instead gets us the same result, more tersely.</p>
+
+        <pre><code>from functools import partial
+
+from_binary = partial(int, base=2)
+from_octal = partial(int, base=8)
+from_hex = partial(int, base=16)
+
+print(from_binary('10010')) # prints 18
+print(from_octal('34472')) # prints 14650
+print(from_hex('7e8c9')) # prints 518345</code></pre>
+
+        <p>This example is trivial, but <code>partial</code> earns its keep in real API design.</p>
+
+        <h2>Heard of <code>for..else</code>?</h2>
+
+        <p>The snippet below checks whether an odd number exists in a list, using a boolean flag to do it. Can you find a way to do this without a flag, and without making the code more complex? Think about it.</p>
+
+        <pre><code>flag = False
+
+for i in [2, 3, 4, 5, 6]:
+  if i % 2 != 0:
+    flag = True
+    break
+
+if flag:
+  print("An odd number exists in the array.")
+else:
+  print("An odd number does not exist in the array.")</code></pre>
+
+        <p>Whether or not you came up with something, an elegant solution is Python's <code>for..else</code> syntax. The <code>else</code> block runs only if the loop finishes without hitting a <code>break</code>.</p>
+
+        <pre><code>for i in [2, 2, 4, 4, 6]:
+  if i % 2 != 0:
+    print("An odd number exists in the array.")
+    break
+else:
+  print("An odd number does not exist in the array.")</code></pre>
+
+        <p>We've elegantly avoided the flag, and the code reads a lot cleaner. Another one for the code review pile.</p>
+
+        <h2>Manage your contexts</h2>
+
+        <p>There will be situations in your coding life where you need something to run before and after your actual logic.</p>
+
+        <p>Think closing a file after you're done reading it, releasing a lock, or having a thread release resources once a task finishes. Plenty of use cases like this exist.</p>
+
+        <p>Python's <code>with</code> statement is built for exactly this.</p>
+
+        <pre><code>with open('filename.txt', 'r') as f:
+  ...</code></pre>
+
+        <p>That snippet automatically closes the file once the <code>with</code> block finishes. This pattern is called a context manager, and Python gives you a few ways to build one.</p>
+
+        <p>The first is a plain class with <code>__enter__</code> and <code>__exit__</code> dunder methods. Run this to see the flow.</p>
+
+        <pre><code>class Demo:
+  def __init__(self):
+    print("__init__")
+
+  def __enter__(self):
+    print("__enter__")
+    return "whatever __enter__ returns"
+
+  def __exit__(self, *args):
+    print("__exit__")
+
+with Demo() as x:
+  print(x)
+  print("hello")
+
+## Output
+__init__
+__enter__
+whatever __enter__ returns
+hello
+__exit__</code></pre>
+
+        <p><code>x</code> ends up being whatever <code>__enter__</code> returns, and the order of execution is <code>__init__</code>, <code>__enter__</code>, the code inside the <code>with</code> block, then <code>__exit__</code>. Anything you want to run before your logic goes in <code>__enter__</code>; anything after goes in <code>__exit__</code>.</p>
+
+        <p>The second method is useful when you don't want the overhead of a class, or have very little to do before and after your logic. Just use a function instead: add the <code>@contextmanager</code> decorator, and anything before <code>yield</code> behaves like <code>__enter__</code>, anything after behaves like <code>__exit__</code>.</p>
+
+        <pre><code>from contextlib import contextmanager
+
+@contextmanager
+def Demo():
+  print("__enter__")
+  yield "hello"
+  print("__exit__")
+
+with Demo() as x:
+  print(x)
+
+## Output
+__enter__
+hello
+__exit__</code></pre>
+
+        <p>Notice how <code>x</code> here stores the value returned by <code>yield</code>.</p>
+
+        <p>The third way generalizes this further. If you're repeating the same before-and-after logic a lot, use a <code>ContextDecorator</code> instead of copy-pasting it. Below, we write a class like the one in the first method, but have it inherit from <code>ContextDecorator</code>.</p>
+
+        <pre><code>from contextlib import ContextDecorator
+
+class Demo(ContextDecorator):
+  def __enter__(self):
+    print("__enter__")
+
+  def __exit__(self, *args):
+    print("__exit__")
+
+@Demo()
+def DemoFunction():
+  print("hello")
+
+DemoFunction()</code></pre>
+
+        <p>Using this class as a decorator on any function lets us reuse the same before-and-after logic everywhere. Write it once, decorate as many functions as you want. Notice the <code>with</code> keyword doesn't even show up in this method.</p>
+
+        <h2>Generator expressions</h2>
+
+        <p>IPython's <code>%timeit</code> magic is great for figuring out what's actually fast. Below, we find all the even numbers up to 1000 and square them, two ways: a generator expression and a plain list comprehension. Then we iterate over each and print the values.</p>
+
+        <pre><code>&gt;&gt; %timeit it = (x**2 for x in range(1000) if x % 2 == 0)
+642 ns &plusmn; 18.1 ns per loop (mean &plusmn; std. dev. of 7 runs, 1000000 loops each)
+
+&gt;&gt; %timeit non_it = [x**2 for x in range(1000) if x % 2 == 0]
+228 &micro;s &plusmn; 2.95 &micro;s per loop (mean &plusmn; std. dev. of 7 runs, 1000 loops each)
+
+&gt;&gt; %timeit for el in it: print(el) #ignoring the output
+44.9 ns &plusmn; 0.769 ns per loop (mean &plusmn; std. dev. of 7 runs, 10000000 loops each)
+
+&gt;&gt; %timeit for el in non_it: print(el) #ignoring the output
+3.77 ms &plusmn; 167 &micro;s per loop (mean &plusmn; std. dev. of 7 runs, 100 loops each)</code></pre>
+
+        <p>Generator expressions come out roughly 10<sup>3</sup> times faster to create and 10<sup>6</sup> times faster to iterate over. Generators are a genuinely useful concept, and swapping your list comprehensions for them can be a real speed win. Most of the time, you can just swap <code>[]</code> for <code>()</code> wherever a list comprehension is generating a series. &#175;\_(&#12484;)_/&#175;</p>
+
+        <h2>Invoke class routines using strings</h2>
+
+        <p>Here's a fun one. Say you have a class like the one below, with 4 private members (using the classic double-underscore trick) and getter functions for each. Since the members are private, you can't access them directly with <code>object.__member</code>, but the getters work fine: <code>object.getter_for_member()</code>.</p>
+
+        <pre><code>class Demo():
+  def __init__(self):
+    self.__name = 'John Doe'
+    self.__age = 18
+    self.__gender = 'Male'
+    self.__location = 'EU'
+
+  def name(self):
+    return self.__name
+
+  def age(self):
+    return self.__age
+
+  def gender(self):
+    return self.__gender
+
+  def location(self):
+    return self.__location
+
+d = Demo()
+print(d.__name) # fails
+print(d.name()) # returns the name</code></pre>
+
+        <p>But what if you're handed the attribute names as strings instead? That's what <code>getattr</code> is for.</p>
+
+        <p><code>getattr</code> takes the object as its first argument and the member name, as a string, as its second.</p>
+
+        <p>Notice how this calls every getter function, using nothing but strings.</p>
+
+        <pre><code>attrs = ['name', 'age', 'gender', 'location']
+d = Demo()
+for attr in attrs:
+    print(getattr(d, attr)())</code></pre>
+
+        <p>It's a handy way to keep a list of attribute names as plain strings and not worry about how they get invoked.</p>
+
+        <p>That's the grab bag for now. I'm always on the hunt for stuff like this. Until next time, adios!</p>
+      </article>
+    </main>
+
+    <footer>
+      <a href="https://github.com/kingroryg">GitHub</a>
+      <a href="https://codeberg.org/kingroryg">Codeberg</a>
+      <a href="https://infosec.exchange/@lprimero">Mastodon</a>
+      <a href="mailto:sarthakm@pm.me">Email</a>
+    </footer>
+
+    <div class="stripe" role="presentation"></div>
+  </div>
+</body>
+</html>
