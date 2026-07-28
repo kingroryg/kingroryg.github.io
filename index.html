@@ -212,25 +212,35 @@
     }
 
     .venue {
-      font-size: 11px;
-      color: #6b6555;
+      justify-self: end;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 9.5px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: #fff;
+      border: 2px solid var(--ink);
+      padding: 2px 7px;
       white-space: nowrap;
-      text-align: right;
     }
 
-    @media (max-width: 560px) {
-      .item {
-        grid-template-columns: 52px minmax(0, 1fr);
-      }
-
-      .venue {
-        grid-column: 1 / -1;
-        text-align: left;
-        margin-top: -6px;
-      }
-    }
+    .venue:empty { border: none; padding: 0; }
 
     .project-desc { color: #4a4536; }
+
+    .blink-tag {
+      display: inline-block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      color: var(--paper);
+      background: var(--red);
+      border: 2px solid var(--ink);
+      padding: 1px 6px;
+      vertical-align: middle;
+    }
 
     details {
       margin-top: 16px;
@@ -287,7 +297,29 @@
     footer a:hover { color: var(--paper); }
 
     @media (max-width: 620px) {
-      .intro { flex-wrap: wrap; }
+      .frame { border-left-width: 4px; border-right-width: 4px; }
+
+      .topbar { padding: 12px 16px 0; }
+
+      .intro { flex-wrap: wrap; padding: 14px 16px 18px; gap: 14px; }
+
+      .nav-links { padding: 12px 16px; gap: 8px; }
+
+      .nav-links a { padding: 7px 12px; font-size: 11px; }
+
+      main { padding: 6px 16px 10px; }
+
+      .item {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding: 10px 0;
+      }
+
+      .meta { order: -1; }
+
+      .venue { justify-self: start; }
+
+      footer { padding: 18px 16px; justify-content: flex-start; }
     }
   </style>
 </head>
@@ -324,7 +356,7 @@
 
     <main>
       <section id="writing" class="writing">
-        <div class="section-title">01 &middot; Posts</div>
+        <div class="section-title">Posts</div>
         <div class="section-rule"></div>
         <div class="list">
           <article class="item">
@@ -333,7 +365,7 @@
             <div class="venue"></div>
           </article>
           <article class="item">
-            <div class="meta">Jul 2026</div>
+            <div class="meta">Jul 2024</div>
             <div class="item-title"><a href="https://smunshi.net/posts/rediscovering-kashmir.html">A running list for rediscovering Kashmir's native culture</a></div>
             <div class="venue"></div>
           </article>
@@ -356,14 +388,9 @@
       </section>
 
       <section id="research">
-        <div class="section-title">02 &middot; Research</div>
+        <div class="section-title">Research</div>
         <div class="section-rule"></div>
         <div class="list">
-          <article class="item">
-            <div class="meta">2026</div>
-            <div class="item-title"><a href="#">Honey Trapping the Frontier</a></div>
-            <div class="venue">arXiv</div>
-          </article>
           <article class="item">
             <div class="meta">2026</div>
             <div class="item-title"><a href="https://arxiv.org/pdf/2604.06436">Defense Trilemma: Why Prompt Injection Defense Wrappers Fail?</a></div>
@@ -375,7 +402,7 @@
             <div class="venue">NeurIPS</div>
           </article>
           <article class="item">
-            <div class="meta"></div>
+            <div class="meta">2026</div>
             <div class="item-title"><a href="https://www.dropbox.com/scl/fi/h35gw4cpfzvzhf7hfg3ik/NeurIPS_2025_Maple_Meltingpot_Specialized_Modular_Neural_Architectures_for_Multi_Agent_Reinforcement_Learning-2.pdf?rlkey=siq4mysrjybtcx0kmbnje03m2&st=kqequtxj&dl=0">MAPLE: Specialized Modular Neural Architectures for Multi-Agent RL</a></div>
             <div class="venue">PDF</div>
           </article>
@@ -398,7 +425,7 @@
       </section>
 
       <section id="projects">
-        <div class="section-title">03 &middot; Projects</div>
+        <div class="section-title">Projects</div>
         <div class="section-rule"></div>
         <div class="list">
           <article class="item">
@@ -413,7 +440,7 @@
           </article>
           <article class="item">
             <div class="meta">03</div>
-            <div class="item-title"><a href="https://x.com/simplysparsh/status/1896035775629967496">UnSQL</a> <span class="project-desc">&ndash; Natural language to SQL for legacy databases. Acquired.</span></div>
+            <div class="item-title"><a href="https://x.com/simplysparsh/status/1896035775629967496">UnSQL</a> <span class="project-desc">&ndash; Natural language to SQL for legacy databases.</span> <span class="blink-tag">ACQUIRED</span></div>
             <div class="venue"></div>
           </article>
           <article class="item">
@@ -447,7 +474,7 @@
       </section>
 
       <section id="press">
-        <div class="section-title">04 &middot; Press</div>
+        <div class="section-title">Press</div>
         <div class="section-rule"></div>
         <div class="list">
           <article class="item">
@@ -485,6 +512,7 @@
     </main>
 
     <footer>
+      <a href="https://github.com/kingroryg">GitHub</a>
       <a href="https://codeberg.org/kingroryg">Codeberg</a>
       <a href="https://infosec.exchange/@lprimero">Mastodon</a>
       <a href="mailto:sarthakm@pm.me">Email</a>
