@@ -41,7 +41,11 @@
       border-left: 6px solid var(--ink);
       border-right: 6px solid var(--ink);
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
+
+    .frame > main { flex: 1 0 auto; }
 
     .stripe { height: 6px; background: var(--red); }
 
