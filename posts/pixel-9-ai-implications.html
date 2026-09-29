@@ -10,6 +10,9 @@
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet" />
   <style>
     :root {
       --ink: #0a0a0a;
@@ -25,9 +28,9 @@
     body {
       background: var(--paper);
       color: var(--ink);
-      font-family: Verdana, Geneva, "Segoe UI", sans-serif;
-      font-size: 13px;
-      line-height: 1.65;
+      font-family: "Lora", Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
     }
 
     a { color: var(--ink); }
@@ -78,7 +81,7 @@
     .post-dek {
       max-width: 62ch;
       margin: 0 0 12px;
-      font-size: 13.5px;
+      font-size: 16.5px;
       color: #3a3628;
     }
 
@@ -91,11 +94,11 @@
       letter-spacing: 0.04em;
     }
 
-    p { margin: 0 0 20px; font-size: 13.5px; }
+    p { margin: 0 0 20px; font-size: 16.5px; }
 
     a {
       color: var(--red);
-      font-weight: bold;
+      font-weight: normal;
       text-decoration: none;
       border-bottom: 1px solid var(--red);
     }
@@ -106,7 +109,7 @@
     em { color: #4a4536; }
 
     ul { margin: 0 0 20px; padding-left: 20px; color: var(--ink); }
-    li { margin-bottom: 8px; font-size: 13.5px; }
+    li { margin-bottom: 8px; font-size: 16.5px; }
 
     .video-container, .image-container { margin: 24px 0; }
 
@@ -177,10 +180,10 @@
       justify-content: flex-end;
       align-items: center;
       gap: 16px;
-      font-size: 12px;
+      font-size: 14px;
     }
 
-    footer a { color: var(--red); font-weight: bold; text-decoration: none; border: none; }
+    footer a { color: var(--red); font-weight: normal; text-decoration: none; border: none; }
     footer a:hover { color: var(--paper); }
 
     @media (max-width: 620px) {

@@ -3,32 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sarthak Munshi</title>
-  <meta name="description" content="Security researcher. Research in ML security, applied cryptography, and network protocols." />
-  <link rel="canonical" href="https://smunshi.net/" />
+  <title>Media | Sarthak Munshi</title>
+  <meta name="description" content="Press coverage and talks featuring Sarthak Munshi." />
+  <link rel="canonical" href="https://smunshi.net/media.html" />
 
-  <meta property="og:title" content="Sarthak Munshi" />
+  <meta property="og:title" content="Media | Sarthak Munshi" />
   <meta property="og:description" content="Security researcher. Research in ML security, applied cryptography, and network protocols." />
-  <meta property="og:url" content="https://smunshi.net/" />
+  <meta property="og:url" content="https://smunshi.net/media.html" />
   <meta property="og:type" content="website" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@kingroryg" />
-  <meta name="twitter:title" content="Sarthak Munshi" />
+  <meta name="twitter:title" content="Media | Sarthak Munshi" />
   <meta name="twitter:description" content="Security researcher." />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Sarthak Munshi",
-    "url": "https://smunshi.net",
-    "jobTitle": "Security Researcher",
-    "sameAs": [
-      "https://infosec.exchange/@lprimero"
-    ]
-  }
-  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -278,6 +265,19 @@
       outline: none;
     }
 
+    .paper-links .venue-tag {
+      color: var(--paper);
+      background: var(--red);
+      border-color: var(--ink);
+    }
+
+    .paper-links a.venue-tag:hover, .paper-links a.venue-tag:focus-visible {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .empty-note { margin: 4px 0 0; color: #4a4536; font-style: italic; }
+
     .project-desc { color: #4a4536; }
 
     .blink-tag {
@@ -386,86 +386,64 @@
       <a class="mark" href="/" aria-label="Home"></a>
     </div>
 
-    <header class="intro">
-      <div class="photo-frame">
-        <img
-          src="https://raw.githubusercontent.com/kingroryg/kingroryg.github.io/refs/heads/main/astronomer.jpg"
-          alt="astronomer"
-        />
-      </div>
-      <div class="intro-text">
-        <h1>I study how systems break.</h1>
-        <p class="hero-copy">
-          I work on machine learning security, applied cryptography, and network protocols — currently at
-          <a href="https://aws.amazon.com/sagemaker/">AWS</a>.</p>
-      </div>
-    </header>
-
     <nav class="nav-links" aria-label="Primary navigation">
-      <a href="#writing">Posts</a>
+      <a href="/">Home</a>
       <a href="work.html">Work</a>
-      <a href="media.html">Media</a>
-      <a href="#other-writing">Other Writing</a>
+      <a href="#press">Press</a>
+      <a href="#talks">Talks</a>
       <a href="mailto:sarthakm@pm.me">Email</a>
     </nav>
 
     <main>
-      <section id="writing" class="writing">
-        <div class="section-title">Posts</div>
+      <section id="press">
+        <div class="section-title">Press</div>
         <div class="section-rule"></div>
         <div class="list">
           <article class="item">
             <div class="meta">Jul 2026</div>
-            <div class="item-title"><a href="https://smunshi.net/posts/ai-theses.html">9 theses on AI</a></div>
-            <div class="venue"></div>
+            <div class="item-title"><a href="https://www.secpod.com/learn/security-research/squidbleed-a-29-year-old-squid-proxy-flaw-that-leaks-cleartext-http-requests">Squidbleed: A 29-Year-Old Squid Proxy Flaw That Leaks Cleartext HTTP Requests</a></div>
+            <div class="venue">SecPod</div>
           </article>
           <article class="item">
-            <div class="meta">Aug 2024</div>
-            <div class="item-title"><a href="https://smunshi.net/posts/pixel-9-ai-implications.html">On Provenance of Pictures</a></div>
-            <div class="venue"></div>
+            <div class="meta">Mar 2026</div>
+            <div class="item-title"><a href="https://theweatherreport.ai/posts/amazon-and-cisco-ai-red-teaming-technique-exposed-llama-3-8b-093-harm-score/">Amazon and Cisco AI red-teaming technique exposed Llama 3 8B with 0.93 harm score</a></div>
+            <div class="venue">The Weather Report</div>
           </article>
           <article class="item">
-            <div class="meta">Mar 2024</div>
-            <div class="item-title"><a href="https://smunshi.net/posts/sagemaker-cuda.html">CUDA 11.8 on SageMaker Studio notebooks</a></div>
-            <div class="venue"></div>
+            <div class="meta">Feb 2026</div>
+            <div class="item-title"><a href="https://kenhuangus.substack.com/p/weve-been-testing-ai-safety-wrong">We've Been Testing AI Safety Wrong. Here's How to Fix It.</a></div>
+            <div class="venue">Ken Huang</div>
           </article>
           <article class="item">
-            <div class="meta">Sep 2023</div>
-            <div class="item-title"><a href="https://smunshi.net/posts/kolmogorov-complexity.html">Kolmogorov Complexity</a></div>
-            <div class="venue"></div>
+            <div class="meta">Nov 2025</div>
+            <div class="item-title"><a href="https://www.cyberdefensemagazine.com/a-cisos-guide-to-runtime-llm-safety-security/">A CISO's Guide to Runtime LLM Safety &amp; Security</a></div>
+            <div class="venue">Cyber Defense Magazine</div>
           </article>
           <article class="item">
-            <div class="meta">Jan 2022</div>
-            <div class="item-title"><a href="https://smunshi.net/posts/aws-waf-gotchas.html">AWS WAF Gotchas</a></div>
-            <div class="venue"></div>
+            <div class="meta">Aug 2025</div>
+            <div class="item-title"><a href="https://shostack.org/blog/mansplaining-your-threat-model-as-a-service/">Mansplaining your threat model, as a service</a></div>
+            <div class="venue">Adam Shostack</div>
           </article>
           <article class="item">
-            <div class="meta">Jan 2018</div>
-            <div class="item-title"><a href="https://smunshi.net/posts/python-booster-pack.html">Python Booster Pack</a></div>
-            <div class="venue"></div>
-          </article>
-          <article class="item">
-            <div class="meta">Jan 2017</div>
-            <div class="item-title"><a href="https://smunshi.net/posts/judy-arrays.html">What Are Judy Arrays?</a></div>
-            <div class="venue"></div>
-          </article>
-          <article class="item">
-            <div class="meta">Feb 2016</div>
-            <div class="item-title"><a href="https://smunshi.net/posts/kullback-leibler-divergence.html">Kullback-Leibler Divergence</a></div>
-            <div class="venue"></div>
+            <div class="meta">Feb 2012</div>
+            <div class="item-title"><a href="https://www.thehindu.com/features/kids/play-the-numbers-game/article2888602.ece">Play the numbers game</a></div>
+            <div class="venue">The Hindu</div>
           </article>
         </div>
       </section>
 
-      <section id="other-writing">
-        <div class="section-title">Other Writing</div>
+
+      <section id="talks">
+        <div class="section-title">Talks</div>
         <div class="section-rule"></div>
         <div class="list">
+          <!-- Talk entry template:
           <article class="item">
-            <div class="meta">Jul 2024</div>
-            <div class="item-title"><a href="https://smunshi.net/posts/rediscovering-kashmir.html">A running list for rediscovering Kashmir's native culture</a></div>
-            <div class="venue"></div>
-          </article>
+            <div class="meta">Mon YYYY</div>
+            <div class="item-title"><a href="LINK">Talk title</a></div>
+            <div class="venue">Event</div>
+          </article> -->
+          <p class="empty-note">Coming soon.</p>
         </div>
       </section>
     </main>
