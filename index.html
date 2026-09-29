@@ -227,6 +227,46 @@
 
     .venue:empty { border: none; padding: 0; }
 
+    .year {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: var(--red);
+      padding: 14px 0 2px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .list .year:first-child { padding-top: 0; }
+
+    .paper { grid-template-columns: minmax(0, 1fr) auto; }
+
+    .paper-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+
+    .paper-links a {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 9.5px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      box-shadow: 2px 2px 0 var(--ink);
+      padding: 1px 7px;
+      transition: transform 90ms ease, box-shadow 90ms ease, background 90ms ease, color 90ms ease;
+    }
+
+    .paper-links a:hover, .paper-links a:focus-visible {
+      background: var(--red);
+      color: var(--paper);
+      border-color: var(--red);
+      transform: translate(2px, 2px);
+      box-shadow: 0 0 0 var(--ink);
+      outline: none;
+    }
+
     .project-desc { color: #4a4536; }
 
     .blink-tag {
@@ -407,41 +447,64 @@
         <div class="section-title">Research</div>
         <div class="section-rule"></div>
         <div class="list">
-          <article class="item">
-            <div class="meta">2027</div>
-            <div class="item-title"><a href="https://arxiv.org/pdf/#">
-              Measuring Strategic Reporting Under Asymmetric Oversight</a></div>
+          <div class="year">2027</div>
+          <article class="item paper">
+            <div>
+              <div class="item-title"><a href="https://arxiv.org/pdf/#">Measuring Strategic Reporting Under Asymmetric Oversight</a></div>
+            </div>
             <div class="venue">IEEE SaTML</div>
           </article>
-          <article class="item">
-            <div class="meta">2026</div>
-            <div class="item-title"><a href="https://arxiv.org/pdf/#">
-              SuperRed: AI Red-Teaming and Security Benchmarking with Fine-grained Threat Model</a></div>
+          <div class="year">2026</div>
+          <article class="item paper">
+            <div>
+              <div class="item-title"><a href="https://arxiv.org/pdf/#">SuperRed: AI Red-Teaming and Security Benchmarking with Fine-grained Threat Model</a></div>
+              <div class="paper-links">
+                <a href="https://youtu.be/owRhsxO5mUE?si=ChgVIwFlqfND7EKJ&amp;t=593">Video</a>
+              </div>
+            </div>
             <div class="venue">ICLR</div>
           </article>
-          <article class="item">
-            <div class="meta">2026</div>
-            <div class="item-title"><a href="https://arxiv.org/pdf/2604.06436">Defense Trilemma: Why Prompt Injection Defense Wrappers Fail?</a></div>
-            <div class="venue">arXiv</div>
+          <article class="item paper">
+            <div>
+              <div class="item-title"><a href="https://arxiv.org/pdf/2604.06436">Defense Trilemma: Why Prompt Injection Defense Wrappers Fail?</a></div>
+              <div class="paper-links">
+                <a href="https://arxiv.org/pdf/2604.06436">Preprint</a>
+              </div>
+            </div>
+            <div class="venue"></div>
           </article>
-          <article class="item">
-            <div class="meta">2026</div>
-            <div class="item-title"><a href="https://arxiv.org/pdf/2602.22291">Manifold of Failure: Behavioral Attraction Basins in Language Models</a></div>
-            <div class="venue">arXiv</div>
+          <article class="item paper">
+            <div>
+              <div class="item-title"><a href="https://arxiv.org/pdf/2602.22291">Manifold of Failure: Behavioral Attraction Basins in Language Models</a></div>
+              <div class="paper-links">
+                <a href="https://arxiv.org/pdf/2602.22291">Preprint</a>
+              </div>
+            </div>
+            <div class="venue"></div>
           </article>
-          <article class="item">
-            <div class="meta">2025</div>
-            <div class="item-title"><a href="https://www.dropbox.com/scl/fi/h35gw4cpfzvzhf7hfg3ik/NeurIPS_2025_Maple_Meltingpot_Specialized_Modular_Neural_Architectures_for_Multi_Agent_Reinforcement_Learning-2.pdf?rlkey=siq4mysrjybtcx0kmbnje03m2&st=kqequtxj&dl=0">MAPLE: Specialized Modular Neural Architectures for Multi-Agent RL</a></div>
+          <div class="year">2025</div>
+          <article class="item paper">
+            <div>
+              <div class="item-title"><a href="https://www.dropbox.com/scl/fi/h35gw4cpfzvzhf7hfg3ik/NeurIPS_2025_Maple_Meltingpot_Specialized_Modular_Neural_Architectures_for_Multi_Agent_Reinforcement_Learning-2.pdf?rlkey=siq4mysrjybtcx0kmbnje03m2&st=kqequtxj&dl=0">MAPLE: Specialized Modular Neural Architectures for Multi-Agent RL</a></div>
+            </div>
             <div class="venue">PDF</div>
           </article>
-          <article class="item">
-            <div class="meta">2025</div>
-            <div class="item-title"><a href="https://dl.acm.org/doi/10.1145/3846173">Representation Control for LLMs: Survey and Research Challenges</a></div>
+          <article class="item paper">
+            <div>
+              <div class="item-title"><a href="https://dl.acm.org/doi/10.1145/3846173">Representation Control for LLMs: Survey and Research Challenges</a></div>
+              <div class="paper-links">
+                <a href="https://arxiv.org/pdf/2502.17601">Preprint</a>
+              </div>
+            </div>
             <div class="venue">ACM Computing Surveys</div>
           </article>
-          <article class="item">
-            <div class="meta">2025</div>
-            <div class="item-title"><a href="https://link.springer.com/chapter/10.1007/978-3-032-16165-9_1">ACSE-Eval: Can LLMs threat-model real-world cloud infrastructure?</a></div>
+          <article class="item paper">
+            <div>
+              <div class="item-title"><a href="https://link.springer.com/chapter/10.1007/978-3-032-16165-9_1">ACSE-Eval: Can LLMs threat-model real-world cloud infrastructure?</a></div>
+              <div class="paper-links">
+                <a href="https://arxiv.org/abs/2505.11565">Preprint</a>
+              </div>
+            </div>
             <div class="venue">ESORICS Workshops</div>
           </article>
           <!-- <article class="item">
@@ -553,7 +616,7 @@
 
     <footer>
       <a href="https://github.com/kingroryg">GitHub</a>
-      <a href="https://x.com/kingroryg">X</a>
+      <a href="https://scholar.google.com/citations?user=0RfLLJcAAAAJ&amp;hl=en&amp;oi=ao">Google Scholar</a>
       <a href="mailto:sarthakm@pm.me">Email</a>
     </footer>
 
