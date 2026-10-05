@@ -238,7 +238,23 @@
 
     .year-group .meta { padding-top: 4px; }
 
-    .paper { padding: 4px 0 8px; }
+    .paper {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+      padding: 8px 0 12px;
+    }
+
+    .paper-thumb {
+      display: block;
+      width: 150px;
+      height: 94px;
+      object-fit: contain;
+      background: #fff;
+      border: 1px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
 
     .paper-title { font-weight: normal; font-size: 16.5px; line-height: 1.45; }
 
@@ -381,6 +397,10 @@
 
       .paper-links { display: flex; margin: 4px 0 0; }
 
+      .paper { grid-template-columns: 1fr; gap: 8px; }
+
+      .paper-thumb { width: 100%; max-width: 320px; height: auto; aspect-ratio: 16 / 10; }
+
       footer { padding: 18px 16px; justify-content: flex-start; }
     }
   </style>
@@ -410,29 +430,38 @@
             <div class="meta">2026</div>
             <div>
               <div class="paper">
-                <div class="paper-title">SuperRed: AI Red-Teaming and Security Benchmarking with Fine-grained Threat Model
-                  <span class="paper-links">
-                  <span class="venue-tag">ICLR</span>
-                  <a href="https://youtu.be/owRhsxO5mUE?si=ChgVIwFlqfND7EKJ&amp;t=593">Video</a>
-                  </span>
-                </div>
-                <div class="paper-authors">Simon Sure, <b>Sarthak Munshi</b>, Rishabh Sinha, Zhun Wang, Dawn Song</div>
+                <img class="paper-thumb" src="/images/research/superred.webp" alt="SuperRed threat model: scope, feedback, attacker model, budget" loading="lazy" />
+                <div>
+                  <div class="paper-title">SuperRed: AI Red-Teaming and Security Benchmarking with Fine-grained Threat Model
+                    <span class="paper-links">
+                    <span class="venue-tag">ICLR</span>
+                    <a href="https://youtu.be/owRhsxO5mUE?si=ChgVIwFlqfND7EKJ&amp;t=593">Video</a>
+                    </span>
+                  </div>
+                  <div class="paper-authors">Simon Sure, <b>Sarthak Munshi</b>, Rishabh Sinha, Zhun Wang, Dawn Song</div>
+                  </div>
               </div>
               <div class="paper">
-                <div class="paper-title">Defense Trilemma: Why Prompt Injection Defense Wrappers Fail?
-                  <span class="paper-links">
-                  <a href="https://arxiv.org/pdf/2604.06436">Preprint</a>
-                  </span>
-                </div>
-                <div class="paper-authors">Manish Bhatt, <b>Sarthak Munshi</b>, Vineeth Sai Narajala, Idan Habler, Ammar Al-Kahfah, Ken Huang, Joel Webb, Blake Gatto, Md Tamjidul Hoque</div>
+                <img class="paper-thumb" src="/images/research/defense-trilemma.webp" alt="The defense trilemma: continuity, utility preservation, completeness" loading="lazy" />
+                <div>
+                  <div class="paper-title">Defense Trilemma: Why Prompt Injection Defense Wrappers Fail?
+                    <span class="paper-links">
+                    <a href="https://arxiv.org/pdf/2604.06436">Preprint</a>
+                    </span>
+                  </div>
+                  <div class="paper-authors">Manish Bhatt, <b>Sarthak Munshi</b>, Vineeth Sai Narajala, Idan Habler, Ammar Al-Kahfah, Ken Huang, Joel Webb, Blake Gatto, Md Tamjidul Hoque</div>
+                  </div>
               </div>
               <div class="paper">
-                <div class="paper-title">Manifold of Failure: Behavioral Attraction Basins in Language Models
-                  <span class="paper-links">
-                  <a href="https://arxiv.org/pdf/2602.22291">Preprint</a>
-                  </span>
-                </div>
-                <div class="paper-authors"><b>Sarthak Munshi</b>, Manish Bhatt, Vineeth Sai Narajala, Idan Habler, Ammar Al-Kahfah, Ken Huang, Blake Gatto</div>
+                <img class="paper-thumb" src="/images/research/manifold-of-failure.webp" alt="Behavioral heatmaps for three language models" loading="lazy" />
+                <div>
+                  <div class="paper-title">Manifold of Failure: Behavioral Attraction Basins in Language Models
+                    <span class="paper-links">
+                    <a href="https://arxiv.org/pdf/2602.22291">Preprint</a>
+                    </span>
+                  </div>
+                  <div class="paper-authors"><b>Sarthak Munshi</b>, Manish Bhatt, Vineeth Sai Narajala, Idan Habler, Ammar Al-Kahfah, Ken Huang, Blake Gatto</div>
+                  </div>
               </div>
             </div>
           </div>
@@ -440,30 +469,39 @@
             <div class="meta">2025</div>
             <div>
               <div class="paper">
-                <div class="paper-title">MAPLE: Specialized Modular Neural Architectures for Multi-Agent RL
-                  <span class="paper-links">
-                  <a href="https://www.dropbox.com/scl/fi/h35gw4cpfzvzhf7hfg3ik/NeurIPS_2025_Maple_Meltingpot_Specialized_Modular_Neural_Architectures_for_Multi_Agent_Reinforcement_Learning-2.pdf?rlkey=siq4mysrjybtcx0kmbnje03m2&amp;st=kqequtxj&amp;dl=0">PDF</a>
-                  </span>
-                </div>
-                <div class="paper-authors">Zahra Sheikhbahaee, Chang Su, <b>Sarthak Munshi</b>, Aniket Didolkar, Juan David Vargas, Adam Safron, Nicco Reggente, Leonardo Christov-Moore, Dianbo Liu, Irina Rish</div>
+                <img class="paper-thumb" src="/images/research/maple.webp" alt="MAPLE architecture with slot attention and recurrent modules" loading="lazy" />
+                <div>
+                  <div class="paper-title">MAPLE: Specialized Modular Neural Architectures for Multi-Agent RL
+                    <span class="paper-links">
+                    <a href="https://www.dropbox.com/scl/fi/h35gw4cpfzvzhf7hfg3ik/NeurIPS_2025_Maple_Meltingpot_Specialized_Modular_Neural_Architectures_for_Multi_Agent_Reinforcement_Learning-2.pdf?rlkey=siq4mysrjybtcx0kmbnje03m2&amp;st=kqequtxj&amp;dl=0">PDF</a>
+                    </span>
+                  </div>
+                  <div class="paper-authors">Zahra Sheikhbahaee, Chang Su, <b>Sarthak Munshi</b>, Aniket Didolkar, Juan David Vargas, Adam Safron, Nicco Reggente, Leonardo Christov-Moore, Dianbo Liu, Irina Rish</div>
+                  </div>
               </div>
               <div class="paper">
-                <div class="paper-title">Representation Control for LLMs: Survey and Research Challenges
-                  <span class="paper-links">
-                  <a class="venue-tag" href="https://dl.acm.org/doi/10.1145/3846173">ACM Computing Surveys</a>
-                  <a href="https://arxiv.org/pdf/2502.17601">Preprint</a>
-                  </span>
-                </div>
-                <div class="paper-authors">Lukasz Bartoszcze, <b>Sarthak Munshi</b>, Bryan Sukidi, Jennifer Yen, Zejia Yang, David Williams-King, Linh Le, Kosi Asuzu, Carsten Maple</div>
+                <img class="paper-thumb" src="/images/research/representation-control.webp" alt="Representation reading: concepts, tasks, functions" loading="lazy" />
+                <div>
+                  <div class="paper-title">Representation Control for LLMs: Survey and Research Challenges
+                    <span class="paper-links">
+                    <a class="venue-tag" href="https://dl.acm.org/doi/10.1145/3846173">ACM Computing Surveys</a>
+                    <a href="https://arxiv.org/pdf/2502.17601">Preprint</a>
+                    </span>
+                  </div>
+                  <div class="paper-authors">Lukasz Bartoszcze, <b>Sarthak Munshi</b>, Bryan Sukidi, Jennifer Yen, Zejia Yang, David Williams-King, Linh Le, Kosi Asuzu, Carsten Maple</div>
+                  </div>
               </div>
               <div class="paper">
-                <div class="paper-title">ACSE-Eval: Can LLMs threat-model real-world cloud infrastructure?
-                  <span class="paper-links">
-                  <a class="venue-tag" href="https://link.springer.com/chapter/10.1007/978-3-032-16165-9_1">ESORICS Workshops</a>
-                  <a href="https://arxiv.org/abs/2505.11565">Preprint</a>
-                  </span>
-                </div>
-                <div class="paper-authors"><b>Sarthak Munshi</b>, Swapnil Pathak, Sonam Ghatode, Thenuga Priyadarshini, Dhivya Chandramouleeswaran, Ashutosh Rana</div>
+                <img class="paper-thumb" src="/images/research/acse-eval.webp" alt="Sample cloud architecture with diagram-as-code and CDK" loading="lazy" />
+                <div>
+                  <div class="paper-title">ACSE-Eval: Can LLMs threat-model real-world cloud infrastructure?
+                    <span class="paper-links">
+                    <a class="venue-tag" href="https://link.springer.com/chapter/10.1007/978-3-032-16165-9_1">ESORICS Workshops</a>
+                    <a href="https://arxiv.org/abs/2505.11565">Preprint</a>
+                    </span>
+                  </div>
+                  <div class="paper-authors"><b>Sarthak Munshi</b>, Swapnil Pathak, Sonam Ghatode, Thenuga Priyadarshini, Dhivya Chandramouleeswaran, Ashutosh Rana</div>
+                  </div>
               </div>
             </div>
           </div>
