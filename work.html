@@ -316,42 +316,43 @@
       vertical-align: middle;
     }
 
-    details {
-      margin-top: 16px;
-      font-size: 15px;
-      border: 2px solid var(--ink);
-      padding: 10px 14px;
-      background: #fff;
-    }
-
-    summary {
-      cursor: pointer;
-      list-style: none;
-      color: var(--ink);
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: bold;
-      text-transform: uppercase;
-      font-size: 11px;
-      letter-spacing: 0.04em;
+    .vuln-cloud {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px 28px;
+      padding: 2px 0 4px;
+      font-size: 16.5px;
+      line-height: 1.9;
     }
 
-    summary::-webkit-details-marker { display: none; }
-    summary::after { content: "+"; color: var(--red); font-size: 14px; }
-    details[open] summary::after { content: "\2212"; }
+    .vuln { white-space: nowrap; }
 
-    .cve-list { padding-top: 10px; }
-
-    .cve-item {
-      padding: 6px 0;
-      border-top: 1px dashed #ccc;
-      color: #333;
-      font-size: 15px;
+    .vuln a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--red);
     }
 
-    .cve-item a { color: var(--red); }
+    .vuln a:hover { color: var(--red); }
+
+    .vuln-desc {
+      margin-left: 7px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #777777;
+    }
+
+    .sub-title {
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #555555;
+      margin: 0 0 6px;
+    }
 
     /* ---------- footer ---------- */
     footer {
@@ -397,6 +398,10 @@
 
       .paper-links { display: flex; margin: 4px 0 0; }
 
+      .vuln { display: block; white-space: normal; }
+
+      .vuln-desc { display: block; margin: 0; }
+
       .paper { grid-template-columns: 1fr; gap: 8px; }
 
       .paper-thumb { width: 100%; max-width: 320px; height: auto; aspect-ratio: 16 / 10; }
@@ -422,6 +427,19 @@
 
 
     <main>
+      <section id="security">
+        <div class="section-title">Security</div>
+        <div class="section-rule"></div>
+        <div class="sub-title">&ldquo;Public&rdquo; vulnerability disclosures</div>
+        <div class="vuln-cloud">
+          <span class="vuln"><a href="https://github.com/squid-cache/squid/security/advisories/GHSA-5vmx-9x64-9284">squid proxy</a><span class="vuln-desc">remote code execution via cache digest</span></span>
+          <span class="vuln"><a href="https://github.com/memcached/memcached/wiki/ReleaseNotes1642">memcached</a><span class="vuln-desc">credential recovery via sasl timing</span></span>
+          <span class="vuln"><a href="https://git.ffmpeg.org/gitweb/ffmpeg.git/commit/65fc0db581c4ee2a891b7b72f6056357ceb3b0bd">ffmpeg</a><span class="vuln-desc">memory corruption from crafted input</span></span>
+          <span class="vuln"><a href="https://github.com/mlflow/mlflow/issues/18541">apache mlflow</a><span class="vuln-desc">authorization bypass in S3 bucket consumption</span></span>
+          <span class="vuln"><a href="https://github.com/kmackay/micro-ecc/security/advisories/GHSA-xwv4-83cf-3x5q">micro-ecc</a><span class="vuln-desc">wrong ECDH secrets and signing crashes on unaligned curves</span></span>
+        </div>
+      </section>
+
       <section id="research">
         <div class="section-title">Research</div>
         <div class="section-rule"></div>
@@ -539,28 +557,6 @@
             <div class="venue"></div>
           </article>
         </div>
-
-        <details>
-          <summary>Public vulnerability disclosures / CVEs</summary>
-          <div class="cve-list">
-            <div class="cve-item">
-              <span>Heap overflow-based RCE in GGUF loading // <a href="#">apple mlx</a></span>
-            </div>
-            <div class="cve-item">
-              <span>Stack overflow in SSPI auth // <a href="#">squid proxy</a></span><br />
-              <span>Heap overflow in cache digest // <a href="https://github.com/squid-cache/squid/security/advisories/GHSA-5vmx-9x64-9284">squid proxy</a></span>
-            </div>
-            <div class="cve-item">
-              <span>Timing side channel in sasl server // <a href="https://github.com/memcached/memcached/wiki/ReleaseNotes1642">memcached</a></span>
-            </div>
-            <div class="cve-item">
-              <span>Format string buffer overflow in avformat // <a href="https://git.ffmpeg.org/gitweb/ffmpeg.git/commit/65fc0db581c4ee2a891b7b72f6056357ceb3b0bd">ffmpeg</a></span>
-            </div>
-            <div class="cve-item">
-              <span>Authorization bypass in S3 bucket consumption // <a href="https://github.com/mlflow/mlflow/issues/18541">apache mlflow</a></span>
-            </div>
-          </div>
-        </details>
       </section>
 
     </main>
